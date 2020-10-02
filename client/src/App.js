@@ -1,6 +1,13 @@
 import React ,{useRef}from 'react';
 import logo from './logo.svg';
-import Jumbotron from './components/jumbotron'
+import Jumbotron from './components/jumbotron';
+import Profile from "./components/Profile";
+import Nav from './components/navbar/Nav';
+import { BrowserRouter as Router, Route,  Link } from "react-router-dom";
+import Home from './pages/Home';
+import Search from './pages/Search';
+
+
 //import './App.css';
 
 function App() {
@@ -27,6 +34,23 @@ function App() {
   }
 
   return (
+// <<<<<<< begum
+//     <Router>
+//       <div>
+//         <Nav />
+//         {/* <Switch> */}
+//           <Route exact path={"/"} >
+//             <Home />
+//           </Route>
+//         <Route exact path={"/search"}>
+//           <Search />
+//           </Route> 
+//         {/* </Switch> */}
+//         <Jumbotron />
+//         <Profile />
+//       </div>
+//     </Router>
+
     <div className="app">
       <div>
         <h1>Register</h1>
@@ -36,6 +60,7 @@ function App() {
         <Jumbotron />
       </div>
     </div>
+
   );
 }
 
