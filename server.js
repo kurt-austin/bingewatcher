@@ -6,7 +6,7 @@
 
 var express = require("express");
 var session = require("express-session");
-var compression = require('compression')
+var compression = require('compression');
 // var bodyParse = require("body-parse");
 
 
@@ -20,7 +20,9 @@ var app = express();
 var PORT = process.env.PORT || 8080;
  
 // Requiring our models for syncing
-//var db = require("./models");
+
+var db = require("./models");
+
 app.use((req,res,next)=>{
   console.log(req.url, req.method, res.statusCode)
   next()
@@ -51,8 +53,8 @@ app.use(express.static("public"));
 
 // Syncing our sequelize models and then starting our Express app
 
-//db.sequelize.sync({ force: true }).then(function() {
+db.sequelize.sync().then(function() {
   app.listen(PORT, function() {
-    console.log("App listening on PORT " + PORT);
+    console.log("App listening at http://localhost:" + PORT);
   });
-//});
+});
