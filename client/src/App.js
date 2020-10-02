@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useRef}from 'react';
 import logo from './logo.svg';
 import Jumbotron from './components/jumbotron';
 import Profile from "./components/Profile";
@@ -11,22 +11,56 @@ import Search from './pages/Search';
 //import './App.css';
 
 function App() {
+  const userRef = useRef()
+  const passRef = useRef()
+  const doIt = ()=>{
+    console.log("we did it") 
+    loginUser(userRef.current.value, passRef.current.value)
+  }
+  function loginUser(email, password) {
+    fetch("/api/login", {
+      email: email,
+      password: password
+    })
+      .then((parameter) => {
+        
+    debugger
+        window.location.replace("/members");
+        // If there's an error, log the error
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   return (
-    <Router>
+// <<<<<<< begum
+//     <Router>
+//       <div>
+//         <Nav />
+//         {/* <Switch> */}
+//           <Route exact path={"/"} >
+//             <Home />
+//           </Route>
+//         <Route exact path={"/search"}>
+//           <Search />
+//           </Route> 
+//         {/* </Switch> */}
+//         <Jumbotron />
+//         <Profile />
+//       </div>
+//     </Router>
+
+    <div className="app">
       <div>
-        <Nav />
-        {/* <Switch> */}
-          <Route exact path={"/"} >
-            <Home />
-          </Route>
-        <Route exact path={"/search"}>
-          <Search />
-          </Route> 
-        {/* </Switch> */}
+        <h1>Register</h1>
+        <input placeholder="username" ref={userRef}></input>
+        <input placeholder="password" ref={passRef}></input>
+        <button onClick={()=>doIt()}>submit</button>
         <Jumbotron />
-        <Profile />
       </div>
-    </Router>
+    </div>
+
   );
 }
 
