@@ -20,8 +20,13 @@ var app = express();
 var PORT = process.env.PORT || 8080;
  
 // Requiring our models for syncing
+
 var db = require("./models");
 
+app.use((req,res,next)=>{
+  console.log(req.url, req.method, res.statusCode)
+  next()
+})
 app.use(compression())
 
 // Sets up the Express app to handle data parsing
