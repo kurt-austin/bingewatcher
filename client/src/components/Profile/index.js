@@ -24,10 +24,10 @@ class Profile extends Component {
             <input />
           </form>
         </div>
-        <div className="container col-sm-6" onChange={this.onChangeValue}>
-          <input type="radio" value="Male" name="day" /> By Day
-          <input type="radio" value="Female" name="week" /> By Week
-        </div>
+        {/* <div className="container col-sm-6" onChange={this.onChangeValue}>
+          <input type="radio" value="Day" name="day" /> By Day
+          <input type="radio" value="Week" name="week" /> By Week
+        </div> */}
       </div>
     );
   }
