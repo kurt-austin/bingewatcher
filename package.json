@@ -36,6 +36,7 @@
     "passport-local": "^1.0.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.3",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "webpack-dev-server": "^3.11.0"
   }
 }
