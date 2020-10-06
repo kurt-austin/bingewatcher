@@ -1,5 +1,10 @@
-import React ,{useRef}from 'react';
-import Jumbotron from './components/jumbotron';
+import React from 'react';
+//package listen for changes in userdata//
+import {observer} from "mobx-react";
+//import Jumbotron from './components/Jumbotron';
+import userData from "./userData/userData";
+import LoginForm from "./LoginForm";
+import SubmitButton from "./SubmitButton";
 
 
 
@@ -7,44 +12,105 @@ import Jumbotron from './components/jumbotron';
 
 //import './App.css';
 
-function App() {
-  const userRef = useRef()
-  const passRef = useRef()
-  const doIt = ()=>{
-    console.log("we did it") 
-    loginUser(userRef.current.value, passRef.current.value)
-  }
-  function loginUser(email, password) {
-    fetch("/api/login", {
-      email: email,
-      password: password
-    })
-      .then((parameter) => {
-        
-    debugger
-        window.location.replace("/members");
-        // If there's an error, log the error
-      })
-      .catch(err => {
-        console.log(err);
+class App extends React.Component{
+  //api call//
+  async componentDidMount(){
+    try {
+      // checking if user is logged in by ref sessions//
+      let res = await fetch("/loggedIn",{
+        method: "Post",
+        header:{
+          "accept": "application/json",
+          "content-Type": "application/json"
+        }
       });
+      let result = await res.json();
+      if (result && result.sucess){
+        userData.loading = false;
+        userData.isLoggedIn = true;
+        userData.username = result.username;
+
+      }
+      else{
+          userData.loading = false;
+          userData.isLoggedIn = false;
+      }
+    }
+    catch(error){
+      userData.loading = false;
+      userData.isLoggedIn = false;
+
+    }
   }
 
-  return (
+  async Logout(){
+    try {
+      // checking if user is logged in by ref sessions//
+      let res = await fetch("/logout",{
+        method: "Post",
+        header:{
+          "accept": "application/json",
+          "content-Type": "application/json"
+        }
+      });
+      let result = await res.json();
+      if (result && result.sucess){
+        userData.isLoggedIn = false;
+        userData.username = "";
+      
+      }
+    }
+    catch(error){
+      console.log (error)
 
+    }
+  }
 
-    <div className="app">
-      <div>
-      <Jumbotron />
-        <h1>Register</h1>
-        <input placeholder="username" ref={userRef}></input>
-        <input placeholder="password" ref={passRef}></input>
-        <button onClick={()=>doIt()}>submit</button>
-        
-      </div>
+    
+  render(){
+    if (userData.loading){
+      return (<div className="app">
+        <div className= "container">
+         Application loading, please wait...
+        </div>
     </div>
 
-  );
-}
+      );
+    }
+      else { 
+        if(userData.isLoggedIn){
+          return (
+              <div className="app">
+          <div className= "container">
+           Welcome ! {userData.username}
+           
+           <SubmitButton
+           text= {" Log out"}
+           disabled = {false}
+           onClick = {() => this.Logout()}
+           />
+         
+          </div>
+      
+      </div>
+  
+        );
+      }
+      return( 
+        <div className="app">
+        <div className = "container">
+        <SubmitButton
+           text= {" Log out"}
+           disabled = {false}
+           onClick = {() => this.Logout()}
+           />
+         
+          <LoginForm/>
 
-export default App;
+        </div>
+    </div>
+  );
+     }
+      }
+        }
+export default observer(App);

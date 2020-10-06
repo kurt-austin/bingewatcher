@@ -4,9 +4,10 @@
 // ******************************************************************************
 // *** Dependencies
 
-var express = require("express");
-var session = require("express-session");
-var compression = require('compression');
+const express = require("express");
+const path = require("path");
+const app = express()
+const PORT = process.env.PORT || 3001;
 // var bodyParse = require("body-parse");
 
 
@@ -16,8 +17,9 @@ var compression = require('compression');
 
 // Sets up the Express App
 
-var app = express();
-var PORT = process.env.PORT || 8080;
+app.get("*", function(req, res) {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
  
 // Requiring our models for syncing
 
