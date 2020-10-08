@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Jumbotron from "../components/jumbotron/";
-import API from "../utils/API.js";
+//import API from "../utils/API.js";
 function Search() {
     // const [shows, setShows] = useState([])
     // useEffect(() => {
