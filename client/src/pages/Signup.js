@@ -16,7 +16,7 @@ function Signup() {
             .then((parameter) => {
 
                 debugger
-                window.location.replace("/members");
+                window.location.replace("/Profile");
                 // If there's an error, log the error
             })
             .catch(err => {
@@ -29,7 +29,6 @@ function Signup() {
 
         <div className="app">
             <div>
-                <Jumbotron />
                 <h1>Register</h1>
                 <input placeholder="username" ref={userRef}></input>
                 <input placeholder="password" ref={passRef}></input>
