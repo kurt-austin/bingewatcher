@@ -5,6 +5,7 @@ import Col from "./Col";
 import Card from "./Card";
 import SearchForm from "./SearchForm";
 import axios from "axios";
+import API from "./../components/utils/API"
 
 class Search extends Component {
   state = {
@@ -44,6 +45,14 @@ class Search extends Component {
     window.location.href = "/Profile"
   }
 
+  saveToList = ({result}) =>{
+   console.log({result})
+  //  Here is where I call the API and then I need to create a post/create method
+  // in that file.
+
+    
+  }
+
 
   async searchDetail (id) {
     var newArray = this.state.result;
@@ -59,6 +68,7 @@ class Search extends Component {
 
   render() {
     const result = this.state.result;
+    
 
     return (
       <Container>
@@ -79,7 +89,7 @@ class Search extends Component {
                         <p>{result.genre}</p>
                         <p>{result.runtime}</p>
                         <img src={result.image_thumbnail_path} />
-                        <button onClick={() => this.searchDetail(result.id)}>Detail</button>
+                        <button onClick={() => this.saveToList({result})}>Save</button>
                       </li>))}
                   </ul>
                 </div>
