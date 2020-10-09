@@ -10,11 +10,9 @@ class Search extends Component {
   state = {
     result: [{}],
     search: ""
-
   };
 
   async searchTVshows(value) {
-
    this.setState({result: []} )
    await axios.get("https://episodate.com/api/search?=" + value)
       .then(res => {
@@ -26,10 +24,10 @@ class Search extends Component {
       })
       .catch(err => console.log(err));
   };
-
   handleInputChange = event => {
     const value = event.target.value;
     const name = event.target.name;
+
 
     this.setState({
       [name]: value
@@ -42,9 +40,11 @@ class Search extends Component {
     this.searchTVshows(this.state.search);
   };
 
+
   async searchDetail (id) {
     var newArray = this.state.result;
     
+
     await axios.get("https://episodate.com/api/show-details?q=" + id)
     .then(res=>{
       newArray.push(res.data.tvShow)     
@@ -64,6 +64,7 @@ class Search extends Component {
               heading={this.state.result.tv_shows || "Search for a TV show to Begin"}
             >
 
+
               {this.state.result ? (
                 <div className="text-center">
                   <ul className="list-group search-results">
@@ -76,9 +77,9 @@ class Search extends Component {
                         <img src={result.image_thumbnail_path} />
                         <button onClick={() => this.searchDetail(result.id)}>Detail</button>
                       </li>))}
-
                   </ul>
                 </div>
+
 
               ) : (
                   <h3>No Results to Display</h3>
