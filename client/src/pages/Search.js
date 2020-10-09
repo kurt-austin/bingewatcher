@@ -40,6 +40,10 @@ class Search extends Component {
     this.searchTVshows(this.state.search);
   };
 
+  reDirecttoProfile = ()=>{
+    window.location.href = "/Profile"
+  }
+
 
   async searchDetail (id) {
     var newArray = this.state.result;
@@ -85,6 +89,7 @@ class Search extends Component {
                   <h3>No Results to Display</h3>
                 )}
             </Card>
+              <button onClick={this.reDirecttoProfile}>Profile</button>
           </Col>
           <Col size="md-4">
             <Card heading="Search">
