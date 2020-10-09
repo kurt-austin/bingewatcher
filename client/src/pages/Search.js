@@ -5,11 +5,13 @@ import Col from "./Col";
 import Card from "./Card";
 import SearchForm from "./SearchForm";
 import axios from "axios";
+
 class Search extends Component {
   state = {
     result: [{}],
     search: ""
   };
+
   async searchTVshows(value) {
    this.setState({result: []} )
    await axios.get("https://episodate.com/api/search?=" + value)
@@ -25,25 +27,35 @@ class Search extends Component {
   handleInputChange = event => {
     const value = event.target.value;
     const name = event.target.name;
+
+
     this.setState({
       [name]: value
     });
   };
+
   // When the form is submitted, search the Episodate API for the value of `this.state.search`
   handleFormSubmit = event => {
     event.preventDefault();
     this.searchTVshows(this.state.search);
   };
+
+
   async searchDetail (id) {
     var newArray = this.state.result;
+    
+
     await axios.get("https://episodate.com/api/show-details?q=" + id)
     .then(res=>{
       newArray.push(res.data.tvShow)     
       this.setState({result: newArray})
+
     })
   }
+
   render() {
     const result = this.state.result;
+
     return (
       <Container>
         <Row>
@@ -51,6 +63,8 @@ class Search extends Component {
             <Card
               heading={this.state.result.tv_shows || "Search for a TV show to Begin"}
             >
+
+
               {this.state.result ? (
                 <div className="text-center">
                   <ul className="list-group search-results">
@@ -65,6 +79,8 @@ class Search extends Component {
                       </li>))}
                   </ul>
                 </div>
+
+
               ) : (
                   <h3>No Results to Display</h3>
                 )}
@@ -84,4 +100,5 @@ class Search extends Component {
     );
   }
 }
+
 export default Search;
