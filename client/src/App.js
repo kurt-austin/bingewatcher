@@ -7,6 +7,7 @@ import Signup from "./pages/Signup";
 import NotApp from "./pages/NotApp"
 import Profile from "./pages/Profile"
 import Details from "./pages/Details";
+import Footer from './components/footer';
 
 //import footer from "./components/footer";
 //import navbar from "./components/navbar";
@@ -18,7 +19,6 @@ function App() {
   return (
     <Router>
       {/* <Navbar /> */}
-      <h1>title</h1>
       <Jumbotron />
       {/* <Route exact path="/" component={Home} /> */}
       <Route exact path="/Search" component={Search} />
@@ -27,6 +27,7 @@ function App() {
       <Route exact path="/login" component={NotApp} />
       <Route exact path="/Details" component={Details} />
       {/* <Footer /> */}
+      <Footer />
     </Router>
   )
 

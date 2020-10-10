@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, useHistory } from "react-router-dom";
 import API from "../components/utils/API";
 import Jumbotron from '../components/Jumbotron';
 // https://react-bootstrap.netlify.app/getting-started/introduction/
 import { InputGroup, FormControl, Button, ButtonToolbar, ListGroupItem } from 'react-bootstrap';
 
+
+
 function Profile() {
     // Setting our component's initial state
     const [shows, setShows] = useState([])
     const [formObject, setFormObject] = useState({ timeAvailable: 0 })
+    let history = useHistory();
 
     // Load all shows and store them with setShows
     useEffect(() => {
@@ -34,8 +37,11 @@ function Profile() {
     // Deletes a user from the database with a given id, then redirects to the home page (signup)
     function deleteUser(UserId) {
         API.deleteUser(UserId)
-            .then((res) => res.redirect("/"))
-            .catch(err => console.log(err));
+            .then(results => {
+                console.log(results)
+                window.location.href = "/"
+            })
+
     }
 
     // Handles updating component state when the user types into the input field
@@ -64,6 +70,20 @@ function Profile() {
 
         };
     };
+
+    function detailsPage(id, UserId) {
+        API.userDetails(id, UserId)
+            .then(results => {
+                console.log(results)
+                history.push({ pathname: "/Details", id, UserId })
+            })
+        // console.log("I am here")
+        // console.log(id)
+        //     console.log(UserId)
+    }
+
+
+
 
     return (
         <div className="container container-fluid">
@@ -97,9 +117,9 @@ function Profile() {
                                         {shows.length > 0 ? (
                                             shows.filter(show => show.showStatus === "COMPLETED").map(show => (
                                                 <ul key={show.id}>
-                                                    <Link to={"/api/user_tv_shows/:id"}>
-                                                        <strong> Name: {show.name} Length: {show.runtime} </strong>
-                                                    </Link>
+                                                    {/* <Link to={detailsPage}> */}
+                                                    <strong> Name: {show.name} Length: {show.runtime} </strong>
+                                                    {/* </Link> */}
                                                 </ul>)
                                             )
                                         ) : (<p>No results to display</p>)}
@@ -120,10 +140,12 @@ function Profile() {
                                         {shows.length > 0 ? (
                                             shows.filter(show => show.showStatus === "INPROGRESS").map(show => (
                                                 <ul key={show.id}>
-                                                    <Link to={"/api/user_tv_shows/:id"}>
-                                                        <strong> Name: {show.name} Length: {show.runtime} </strong>
+                                                    <div>
+                                                        <a onClick={() => detailsPage(show.id, show.UserId)}>
+                                                            <strong> Name: {show.name} Runtime: {show.runtime} </strong>
+                                                        </a>
                                                         <Button bsStyle="primary" onClick={deleteShow}>Delete Show</Button>
-                                                    </Link>
+                                                    </div>
                                                 </ul>)
                                             )
                                         ) : (<p>No results to display</p>)}
@@ -147,7 +169,7 @@ function Profile() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
             <br>
             </br>
             <div className="btn-group d-flex justify-content-center">
@@ -161,7 +183,7 @@ function Profile() {
                     Continue
                 </button>
             </div>
-        </div>
+        </div >
     );
 }
 

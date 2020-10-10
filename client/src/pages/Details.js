@@ -1,27 +1,24 @@
 // Pie Chart package information: https://www.npmjs.com/package/react-minimal-pie-chart
 
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link, useLocation } from 'react-router-dom';
 import Jumbotron from "../components/Jumbotron";
 import API from "../components/utils/API.js";
 import { PieChart } from 'react-minimal-pie-chart';
-import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Card, ListGroup, ListGroupItem, InputGroup, FormControl } from 'react-bootstrap';
 
-
-function Details() {
-
+function Details(props) {
+    console.log(props)
     const [show, setShow] = useState({})
-    const [user, setUser] = useState(null)
-
-    useEffect(() => {
-        loadShow()
-    }, [])
-
+    const [user, setUser] = useState()
+    const [formObject, setFormObject] = useState({ timeLogged: 0, timeBudgeted: 0 })
 
     const { id } = useParams()
+    const location = useLocation()
+    console.log(location)
     useEffect(() => {
-        API.getUser()
-            .then(res => setUser(res.data))
+        API.loadShow(props.id, props.UserId)
+            .then(res => setShow(res.data))
             .catch(err => console.log(err));
     }, [])
 
@@ -36,10 +33,33 @@ function Details() {
 
     function deleteShow(tvShowId) {
         API.deleteShow(tvShowId)
-            .then(res => loadShow())
+            .then(res => res.redirect("/Profile"))
             .catch(err => console.log(err));
     }
-   
+
+    function handleInputChange(event) {
+        const { name, value } = event.target;
+        console.log(event.target)
+        setFormObject({ ...formObject, [name]: value })
+    };
+
+    function handleFormSubmit(event) {
+        event.preventDefault()
+        if (formObject.timeLogged && formObject.timeBudgeted) {
+
+            API.updateUserSelection(props.id, props.UserId, formObject.timeBudgeted, formObject.timeLogged)
+                .then(results => {
+                    console.log(results)
+                    window.location.href = "/Details"
+                })
+
+        };
+    };
+
+    function backToProfile() {
+        window.location.href = "/Profile"
+    }
+
     return (
         <div className="container">
             <pre>{JSON.stringify(user, null, 2)} </pre>
@@ -49,7 +69,7 @@ function Details() {
                         <Card.Img variant="top" src={show.image} />
                         <Card.Body>
                             <Card.Title> Show Name: {show.name} </Card.Title>
-                            <Card.Text>
+                            <Card.Text> Description:
                                 {show.description}
                             </Card.Text>
                         </Card.Body>
@@ -58,13 +78,39 @@ function Details() {
                             <ListGroupItem> Number of Episodes: {show.numOfEpisodes}</ListGroupItem>
                             <ListGroupItem> Rating: {show.rating}</ListGroupItem>
                             <ListGroupItem> Runtime: {show.runtime}</ListGroupItem>
-                            <ListGroupItem> Time logged: {show.timeLogged} </ListGroupItem>
-                            <ListGroupItem> Time budgeted: {show.timeBudgeted}</ListGroupItem>
+                            <ListGroupItem> Update time logged: {show.timeLogged}
+                                <InputGroup className="mb-3">
+                                    <FormControl
+                                        name="timeLogged"
+                                        onChange={handleInputChange}
+                                        type="number"
+                                        className="form-control"
+                                        placeholder="Update logged time"
+                                        // By entering a value, we are creating a controlled input (whatever value we set in state)
+                                        value={formObject.timeLogged}
+                                    />
+                                </InputGroup>
+                            </ListGroupItem>
+                            <ListGroupItem> Update time budgeted: {show.timeBudgeted}
+                                <InputGroup className="mb-3">
+                                    <FormControl
+                                        name="timeBudgeted"
+                                        onChange={handleInputChange}
+                                        type="number"
+                                        className="form-control"
+                                        placeholder="Update budgeted time"
+                                        // By entering a value, we are creating a controlled input (whatever value we set in state)
+                                        value={formObject.timeBudgeted}
+                                    />
+                                </InputGroup>
+
+                            </ListGroupItem>
+
                         </ListGroup>
                         <Card.Body>
-                            <Card.Link onClick= {deleteShow}>Delete Show</Card.Link>
-                            <Card.Link >Update Show</Card.Link>
-                            
+                            <Card.Link onClick={deleteShow}>Delete Show</Card.Link>
+                            <Card.Link onClick={handleFormSubmit}>Save Changes</Card.Link>
+                            <Card.Link onClick={backToProfile}> Back to Profile </Card.Link>
                         </Card.Body>
                     </Card>
                 </div>
@@ -87,10 +133,10 @@ function Details() {
         </div >
 
 
-
-
     );
 
-};
+}
+
+
 
 export default Details; 
