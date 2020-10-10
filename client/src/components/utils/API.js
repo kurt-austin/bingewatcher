@@ -10,8 +10,8 @@ export default {
         return axios.get("api/user_tv_shows/1");
     },
     // Gets the show with the given id
-    loadShow: function (tvShowId) {
-        return axios.get("api/tv_shows/" + tvShowId);
+    loadShow: function (id, UserId) {
+        return axios.get("api/user_tv_shows/", { id, UserId });
     },
     // Deletes the user using the user id
     deleteUser: function (UserId) {
@@ -21,15 +21,23 @@ export default {
     // Deletes the show with the given id
     deleteShow: function (tvShowId) {
         return axios.delete("api/tv_shows/" + tvShowId);
-    }, 
+    },
     // Saves user time available selection to userdata
-    saveUserSelection: function(user_data) {
+    saveUserSelection: function (user_data) {
         return axios.put("api/user_update", user_data);
-      },
+    },
     // Pulls up user's data
-    getUser: function(user_data) {
+    getUser: function (user_data) {
         return axios.get("api/user_data", user_data);
-      },
-    
+    },
+
+    updateUserSelection: function (id, UserId, timeBudgeted, timeLogged) {
+        return axios.put("/api/update_tv_show", { id, UserId, timeBudgeted, timeLogged })
+    },
+
+    userDetails: function (id, UserId) {
+        console.log(id, UserId)
+        return axios.get("/api/user_tv_show", { id, UserId })
+    }
 
 };
