@@ -5,7 +5,7 @@ import Col from "./Col";
 import Card from "./Card";
 import SearchForm from "./SearchForm";
 import axios from "axios";
-import API from "./../components/utils/API"
+
 
 class Search extends Component {
   state = {
@@ -45,10 +45,22 @@ class Search extends Component {
     window.location.href = "/Profile"
   }
 
-  saveToList = ({result}) =>{
+  async saveToList ({result}) {
    console.log({result})
+   console.log(result.name);
+   result.UserId=1;
+   console.log(result.UserId);
+   
   //  Here is where I call the API and then I need to create a post/create method
   // in that file.
+    await axios.post("/api/add_tv_show", {result})
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => {
+      console.log(err);
+      
+    });
 
     
   }
@@ -88,6 +100,8 @@ class Search extends Component {
                         <p>{result.rating}</p>
                         <p>{result.genre}</p>
                         <p>{result.runtime}</p>
+                        <p>{result.numOfEpisodes}</p>
+                        <p>{result.UserId}</p>
                         <img src={result.image_thumbnail_path} />
                         <button onClick={() => this.saveToList({result})}>Save</button>
                       </li>))}
