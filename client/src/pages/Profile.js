@@ -13,6 +13,8 @@ function Profile() {
     // Load all shows and store them with setShows
     useEffect(() => {
         getShows()
+        //get user info
+        fetch("api/user_data").then(encoded=>encoded.json()).then(data=>console.log(data))
     }, [])
 
     // Loads all shows and sets them to shows
@@ -67,7 +69,7 @@ function Profile() {
 
     return (
         <div className="container container-fluid">
-            <h1 className="text-center"> Welcome! How much time do you have?</h1>
+            <h1 className="text-center"> Welcome! <span class= "name"></span>How much time do you have?</h1>
             <InputGroup className="mb-3">
                 <FormControl
                     name="timeAvailable"

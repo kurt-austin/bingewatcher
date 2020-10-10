@@ -12,23 +12,28 @@ module.exports = function(app) {
     // If the user already has an account send them to the members page
     if (req.user) {
       console.log("req.user1 "+ req.user)
-      // res.redirect("/members");
+      res.redirect("/Profile");
       // res.redirect("/index");
-       res.redirect("/beersearch");
+       res.redirect("/signup");
     }
     res.render("signup")
-    // .catch(function() {
-    //   console.log("catch");
-    // })
+    .catch(function() {
+     console.log("catch");
+     })
   });
 
-  app.get("/login", function(req, res) {
-    // If the user already has an account send them to the members page
-    if (req.user) {
-      console.log("req.user2 "+ req.user)
-      // res.redirect("/members");
-      // res.redirect("/index");
-       res.redirect("/beersearch");
-    }
+
+  
+
+  app.get("/login", isAuthenticated, (req,res) =>{
+    res.render("Profile")
+  // } function(req, res) {
+  //   // If the user already has an account send them to the members page
+  //   if (req.user) {
+  //     console.log("req.user2 "+ req.user)
+  //     // res.redirect("/members");
+  //     // res.redirect("/index");
+  //      res.redirect("/beersearch");
+  //   }
     res.render("login")
-  });
+  })};
