@@ -33,22 +33,6 @@ function NotApp() {
             });
     }
     return (
-        // <<<<<<< begum
-        //     <Router>
-        //       <div>
-        //         <Nav />
-        //         {/* <Switch> */}
-        //           <Route exact path={"/"} >
-        //             <Home />
-        //           </Route>
-        //         <Route exact path={"/search"}>
-        //           <Search />
-        //           </Route> 
-        //         {/* </Switch> */}
-        //         <Jumbotron />
-        //         <Profile />
-        //       </div>
-        //     </Router>
         <div className="login">
             <h1>BingeWatcher</h1>
             <h2>Login</h2>

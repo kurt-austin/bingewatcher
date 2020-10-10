@@ -13,6 +13,8 @@ function Profile() {
     // Load all shows and store them with setShows
     useEffect(() => {
         getShows()
+        //get user info
+        fetch("api/user_data").then(encoded=>encoded.json()).then(data=>console.log(data))
     }, [])
 
     // Loads all shows and sets them to shows
