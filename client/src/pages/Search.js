@@ -6,6 +6,7 @@ import Card from "./Card";
 import SearchForm from "./SearchForm";
 import axios from "axios";
 
+
 class Search extends Component {
   state = {
     result: [{}],
@@ -40,6 +41,30 @@ class Search extends Component {
     this.searchTVshows(this.state.search);
   };
 
+  reDirecttoProfile = ()=>{
+    window.location.href = "/Profile"
+  }
+
+  async saveToList ({result}) {
+   console.log({result})
+   console.log(result.name);
+   result.UserId=1;
+   console.log(result.UserId);
+   
+  //  Here is where I call the API and then I need to create a post/create method
+  // in that file.
+    await axios.post("/api/add_tv_show", {result})
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => {
+      console.log(err);
+      
+    });
+
+    
+  }
+
 
   async searchDetail (id) {
     var newArray = this.state.result;
@@ -55,6 +80,7 @@ class Search extends Component {
 
   render() {
     const result = this.state.result;
+    
 
     return (
       <Container>
@@ -74,8 +100,10 @@ class Search extends Component {
                         <p>{result.rating}</p>
                         <p>{result.genre}</p>
                         <p>{result.runtime}</p>
+                        <p>{result.numOfEpisodes}</p>
+                        <p>{result.UserId}</p>
                         <img src={result.image_thumbnail_path} />
-                        <button onClick={() => this.searchDetail(result.id)}>Detail</button>
+                        <button onClick={() => this.saveToList({result})}>Save</button>
                       </li>))}
                   </ul>
                 </div>
@@ -85,6 +113,7 @@ class Search extends Component {
                   <h3>No Results to Display</h3>
                 )}
             </Card>
+              <button onClick={this.reDirecttoProfile}>Profile</button>
           </Col>
           <Col size="md-4">
             <Card heading="Search">
