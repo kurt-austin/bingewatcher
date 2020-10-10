@@ -2,38 +2,38 @@
 var db = require("../models");
 var passport = require("../config/passport");
 const Sequelize = require('sequelize');
+const axios = require ("axios");
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
   // Otherwise the user will be sent an error
   app.post("/api/login", passport.authenticate("local"), (req, res) => {
+    console.log("where am i",req.body)
     // Sending back a password, even a hashed password, isn't a good idea
-    res.json({
-      userName: req.user.userName,
-      id: req.user.id
-    });
+    res.json(req.user);
   });
   
-  // // api routes listen on port 8080 test call
-  // app.get("/api/login", (req, res) => {
+   //api routes listen on port 8080 test call
+  app.get("/api/login", (req, res) => {
   //   // Sending back a password, even a hashed password, isn't a good idea
-  //   console.log("made it to /api/login route");
-  //   res.json({});
-  // });
+   console.log("made it to /api/login route");
+    res.json({});
+ });
 
   // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
   // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
   // otherwise send back an error
   app.post("/api/signup", (req, res) => {
   // app.get("/api/signup", (req, res) => {
-    console.log("SIGJNUP ROUTE", req.body)
+    console.log("SIGJNUP ROUTE", req.body.result.userName)
     db.User.create({
       userName: req.body.userName,
       password: req.body.password
       // userName: "un_0123456789",
       // password: "pw_0123456789"
     })
+    console.log(req.body.result.userName)
       .then(() => {
         res.redirect(307, "/api/login");
       })

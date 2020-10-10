@@ -5,11 +5,12 @@ function Login() {
         console.log("we did it")
         loginUser(userRef.current.value, passRef.current.value)
     }
-    function loginUser(email, password) {
+    function loginUser(username, password) {
         fetch("/api/login", {
-            email: email,
+            userName: username,
             password: password
         })
+        console.log(userName)
             .then((parameter) => {
 
                 debugger
@@ -38,4 +39,4 @@ function Login() {
     );
 }
 
-export default Signup; 
+export default Login; 
