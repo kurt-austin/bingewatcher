@@ -95,16 +95,21 @@ class Search extends Component {
                 <div className="text-center">
                   <ul className="list-group search-results">
                     {result.map(result => (
-                      <li key={result.id} className="list-group-item">{result.name}
+                      <>
+                      <h3>{result.name}</h3>
+                      <li key={result.id} className="list-group-item">
                         <p>{result.description}</p>
-                        <p>{result.rating}</p>
+                        {/* <p>{result.rating}</p>
                         <p>{result.genre}</p>
                         <p>{result.runtime}</p>
                         <p>{result.numOfEpisodes}</p>
-                        <p>{result.UserId}</p>
+                        <p>{result.UserId}</p> */}
                         <img src={result.image_thumbnail_path} />
+                        <br/>
+                        <br/>
                         <button onClick={() => this.saveToList({result})}>Save</button>
-                      </li>))}
+                      </li>
+                      </>))}
                   </ul>
                 </div>
 
@@ -113,6 +118,7 @@ class Search extends Component {
                   <h3>No Results to Display</h3>
                 )}
             </Card>
+              <br/>
               <button onClick={this.reDirecttoProfile}>Profile</button>
           </Col>
           <Col size="md-4">
