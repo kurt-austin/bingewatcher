@@ -157,16 +157,30 @@ module.exports = function(app) {
 
   // route for adding tv show to a user
   app.post("/api/add_tv_show", (req, res) => {
+    console.log(req.body.result.id)
+    console.log(req.body.result.name);
+    console.log(req.body.result.description);
+    console.log(req.body.result.image);
+    console.log(req.body.result.runtime);
+    console.log(req.body.result.numOfEpisodes);
+    console.log(req.body.result.rating);
+    console.log(req.body.result.genre);
+    console.log(req.body.result.timeBudgeted);
+    console.log(req.body.result.timeLogged);
+    console.log(req.body.result.tvShowID);
+    console.log(req.body.result.createdAt);
+    console.log(req.body.result.updatedAt)
+    console.log(req.body.result.UserId);
     db.Tv_show.create({
-      name: req.body.name,
-      description: req.body.description,
-      image: req.body.image,
-      runtime: req.body.runtime,
-      numOfEpisodes: req.body.numOfEpisodes,
-      rating: req.body.rating,
-      genre: req.body.genre,
-      tvShowID: req.body.tvShowID,
-      UserId: req.body.UserId
+      name: req.body.result.name,
+      description: req.body.result.description,
+      image: req.body.result.image,
+      runtime: req.body.result.runtime,
+      numOfEpisodes: req.body.result.numOfEpisodes,
+      rating: req.body.result.rating,
+      genre: req.body.result.genre,
+      tvShowID: req.body.result.tvShowID,
+      UserId: req.body.result.UserId
   // app.get("/api/add_tv_show", (req, res) => {
       // name: "Cheers",
       // description: "Everybody knows your name!",
@@ -179,6 +193,7 @@ module.exports = function(app) {
       // UserId: 6
     })
       .then(() => {
+        console.log("I made it here")
         res.end();
       })
       .catch(err => {
