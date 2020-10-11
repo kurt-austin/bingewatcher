@@ -76,7 +76,8 @@ function Profile() {
     function detailsPage(id, UserId) {
         API.userDetails(id, UserId)
             .then(results => {
-                console.log(results)
+                console.log("history.push")
+                console.log(id, UserId)
                 history.push({ pathname: "/Details", id, UserId })
             })
         // console.log("I am here")

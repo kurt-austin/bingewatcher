@@ -15,9 +15,14 @@ function Details(props) {
 
     const { id } = useParams()
     const location = useLocation()
+
     console.log(location)
+    console.log(location.UserId)
+    console.log(location.id)
     useEffect(() => {
-        API.loadShow(props.id, props.UserId)
+        // console.log("useEffect")
+        // console.log(props.id, props.UserId)
+        API.loadShow(location.id, location.UserId)
             .then(res => setShow(res.data))
             .catch(err => console.log(err));
     }, [])
@@ -74,7 +79,7 @@ function Details(props) {
                             </Card.Text>
                         </Card.Body>
                         <ListGroup className="list-group-flush">
-                            <ListGroupItem>Genre: {show.genre} </ListGroupItem>
+                            <ListGroupItem> Genre: {show.genre} </ListGroupItem>
                             <ListGroupItem> Number of Episodes: {show.numOfEpisodes}</ListGroupItem>
                             <ListGroupItem> Rating: {show.rating}</ListGroupItem>
                             <ListGroupItem> Runtime: {show.runtime}</ListGroupItem>
