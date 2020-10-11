@@ -11,6 +11,8 @@ export default {
     },
     // Gets the show with the given id
     loadShow: function (id, UserId) {
+        console.log
+        console.log(id, UserId)
         return axios.get("api/user_tv_shows/", { id, UserId });
     },
     // Deletes the user using the user id
