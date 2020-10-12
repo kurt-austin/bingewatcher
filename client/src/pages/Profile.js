@@ -104,11 +104,16 @@ function Profile() {
             API.saveUserSelection(user_data)
                 .then(results => {
                     console.log(results)
-                    window.location.href = "/Search"
+                    // window.location.href = "/Search"
+                    history.push({ pathname: "/Profile", userId: userId })
                 })
                 .catch(err => console.log(err));
 
         };
+    };
+
+    function search(userId) {
+        history.push({ pathname: "/Search", userId: userId })
     };
 
     function detailsPage(id, UserId) {
@@ -183,10 +188,10 @@ function Profile() {
                                             shows.filter(show => show.showStatus === "INPROGRESS").map(show => (
                                                 <ul key={show.id}>
                                                     <div>
-                                                        <a onClick={() => detailsPage(show.id, show.UserId)}>
+                                                        <a href="#" onClick={() => detailsPage(show.id, show.UserId)}>
                                                             <strong> Name: {show.name} Runtime: {show.runtime} </strong>
                                                         </a>
-                                                        <Button bsStyle="primary" onClick={deleteShow}>Delete Show</Button>
+                                                        <Button className="primary" onClick={deleteShow}>Delete Show</Button>
                                                     </div>
                                                 </ul>)
                                             )
@@ -215,19 +220,24 @@ function Profile() {
             <br>
             </br>
             <div className="btn-group d-flex justify-content-center">
-            <button role="button" type="submit" className="btn-sm btn-primary"
+                <button type="submit" className="btn-sm btn-primary"
+                    onClick={() => search(userId)}>
+                    Search Shows
+                </button>
+                <button type="submit" className="btn-sm btn-primary"
+                    onClick={handleFormSubmit}
+                    disabled={!(formObject.timeAvailable)}>
+                    Update Profile
+                </button>
+                <button type="submit" className="btn-sm btn-primary"
                     onClick={() => logout(userId)}>
                     Logout
                 </button>
-                <button role="button" type="submit" className="btn-sm btn-primary"
+                <button type="submit" className="btn-sm btn-primary"
                     onClick={() => deleteUser(userId)}
                 > Delete Profile
                 </button>
-                <button role="button" type="submit" className="btn-sm btn-primary"
-                    onClick={handleFormSubmit}
-                    disabled={!(formObject.timeAvailable)}>
-                    Continue
-                </button>
+
 
             </div>
         </div >
