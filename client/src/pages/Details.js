@@ -1,7 +1,7 @@
 // Pie Chart package information: https://www.npmjs.com/package/react-minimal-pie-chart
 
 import React, { useState, useEffect } from 'react';
-import { useParams, Link, useLocation } from 'react-router-dom';
+import { useParams, Link, useLocation, useHistory } from 'react-router-dom';
 import Jumbotron from "../components/Jumbotron";
 import API from "../components/utils/API.js";
 import { PieChart } from 'react-minimal-pie-chart';
@@ -14,33 +14,49 @@ function Details(props) {
     const [formObject, setFormObject] = useState({ timeLogged: 0, timeBudgeted: 0 })
 
     const { id } = useParams()
+    let history = useHistory();
     const location = useLocation()
 
-    console.log(location)
-    console.log(location.UserId)
-    console.log(location.id)
+    // console.log(location)
+    // console.log(location.UserId)
+    // console.log(location.id)
     useEffect(() => {
-        // console.log("useEffect")
+        console.log("useEffect")
         // console.log(props.id, props.UserId)
+
+        console.log("location info:")
+        console.log("UserId: "+location.UserId)
+        console.log("id: "+location.id)
+        setUser(location.UserId);
         API.loadShow(location.id, location.UserId)
-            .then(res => setShow(res.data))
+            .then(res => {
+                console.log("***show detail***");
+                console.log(res.data[0]);
+                console.log("***budgeted***");
+                console.log(res.data[0].timeBudgeted);
+                setShow(res.data[0])
+                setFormObject({ ...formObject, timeBudgeted: res.data[0].timeBudgeted, timeLogged: res.data[0].timeLogged });
+                console.log(formObject);
+                // setFormObject({ ...formObject, timeLogged: res.data[0].timeLogged });
+                // console.log(formObject);
+            })
             .catch(err => console.log(err));
     }, [])
 
-    function loadShow() {
-        API.loadShow()
-            .then(res => {
-                console.log(res.data)
-                setShow(res.data)
-            })
-            .catch(err => console.log(err));
-    };
+    // function loadShow() {
+    //     API.loadShow()
+    //         .then(res => {
+    //             console.log(res.data)
+    //             setShow(res.data)
+    //         })
+    //         .catch(err => console.log(err));
+    // };
 
-    function deleteShow(tvShowId) {
-        API.deleteShow(tvShowId)
-            .then(res => res.redirect("/Profile"))
-            .catch(err => console.log(err));
-    }
+    // function deleteShow(tvShowId) {
+    //     API.deleteShow(tvShowId)
+    //         .then(res => res.redirect("/Profile"))
+    //         .catch(err => console.log(err));
+    // }
 
     function handleInputChange(event) {
         const { name, value } = event.target;
@@ -52,30 +68,37 @@ function Details(props) {
         event.preventDefault()
         if (formObject.timeLogged && formObject.timeBudgeted) {
 
-            API.updateUserSelection(props.id, props.UserId, formObject.timeBudgeted, formObject.timeLogged)
+            API.updateUserSelection(show.id, show.UserId, formObject.timeBudgeted, formObject.timeLogged)
                 .then(results => {
-                    console.log(results)
-                    window.location.href = "/Details"
+                    // console.log(results)
+                    // window.location.href = "/Details"
+                    history.push({ pathname: "/Details", id: show.id, UserId: show.UserId })
+                    API.loadShow(show.id, show.UserId)
+                    .then(res => {
+                        setShow(res.data[0])
+                        setFormObject({ ...formObject, timeBudgeted: res.data[0].timeBudgeted, timeLogged: res.data[0].timeLogged });
+                    })
+                    .catch(err => console.log(err));
                 })
 
         };
     };
 
     function backToProfile() {
-        window.location.href = "/Profile"
+        history.push({ pathname: "/Profile", userId: user })
+        // window.location.href = "/Profile"
     }
 
     return (
         <div className="container">
-            <pre>{JSON.stringify(user, null, 2)} </pre>
+            {/* <pre>{JSON.stringify(user, null, 2)} </pre> */}
             <div className="row">
                 <div className="col-xs-6 col-md-6">
                     <Card>
                         <Card.Img variant="top" src={show.image} />
                         <Card.Body>
                             <Card.Title> Show Name: {show.name} </Card.Title>
-                            <Card.Text> Description:
-                                {show.description}
+                            <Card.Text> Description: {show.description}
                             </Card.Text>
                         </Card.Body>
                         <ListGroup className="list-group-flush">
@@ -83,6 +106,7 @@ function Details(props) {
                             <ListGroupItem> Number of Episodes: {show.numOfEpisodes}</ListGroupItem>
                             <ListGroupItem> Rating: {show.rating}</ListGroupItem>
                             <ListGroupItem> Runtime: {show.runtime}</ListGroupItem>
+                            <ListGroupItem> Estimated Completion Date: {show.estimatedCompletionDate}</ListGroupItem>
                             <ListGroupItem> Update time logged: {show.timeLogged}
                                 <InputGroup className="mb-3">
                                     <FormControl
@@ -113,7 +137,7 @@ function Details(props) {
 
                         </ListGroup>
                         <Card.Body>
-                            <Card.Link onClick={deleteShow}>Delete Show</Card.Link>
+                            {/* <Card.Link onClick={deleteShow}>Delete Show</Card.Link> */}
                             <Card.Link onClick={handleFormSubmit}>Save Changes</Card.Link>
                             <Card.Link onClick={backToProfile}> Back to Profile </Card.Link>
                         </Card.Body>
@@ -130,7 +154,7 @@ function Details(props) {
                                     { title: 'How much time budgeted this show', value: show.timeLeft, color: '#C13C37' },
                                     { title: 'How much time logged for this show', value: show.timeLogged, color: '#6A2135' },
                                 ]}
-                            />;
+                            />
                         </div>
                     </div>
                 </div>

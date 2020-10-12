@@ -16,7 +16,11 @@ export default {
     },
     // Gets the show with the given id
     loadShow: function (id, UserId) {
-        return axios.get("api/user_tv_shows/", { id, UserId });
+        console.log("loadShow");
+        console.log("id: "+id);
+        console.log("UserId: "+UserId);
+        // return axios.get("/api/user_tv_show", { params: { id, UserId }});
+        return axios.get("/api/user_tv_show/" + id);
     },
     // Deletes the user using the user id
     deleteUser: function (UserId) {
@@ -43,9 +47,10 @@ export default {
         return axios.put("/api/update_tv_show", { id, UserId, timeBudgeted, timeLogged })
     },
 
-    userDetails: function (id, UserId) {
-        console.log(id, UserId)
-        return axios.get("/api/user_tv_show", { id, UserId })
-    }
+    // userDetails: function (id, UserId) {
+    //     console.log("***userDetails***");
+    //     console.log(id, UserId)
+    //     return axios.get("/api/user_tv_show", { id, UserId })
+    // }
 
 };

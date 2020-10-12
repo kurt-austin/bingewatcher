@@ -29,10 +29,10 @@ function Profile() {
             uid = pair[1];
           }
        }
-        console.log("location info: ");
-        console.log(location);
-        console.log("location userId: " + location.userId);
-        console.log("uid: "+uid);
+        // console.log("location info: ");
+        // console.log(location);
+        // console.log("location userId: " + location.userId);
+        // console.log("uid: "+uid);
         setUserId(location.userId||uid);
         getShows(location.userId||uid);
         getUserProfile(location.userId||uid);
@@ -126,13 +126,13 @@ function Profile() {
     };
 
     function detailsPage(id, UserId) {
-        API.userDetails(id, UserId)
-            .then(results => {
-                console.log("history.push")
-                console.log(id, UserId)
+        // API.userDetails(id, UserId)
+        //     .then(results => {
+        //         console.log("history.push")
+        //         console.log(id, UserId)
                 history.push({ pathname: "/Details", id, UserId })
-            })
-            .catch(err => console.log(err));
+            // })
+            // .catch(err => console.log(err));
         // console.log("I am here")
         // console.log(id)
         //     console.log(UserId)
@@ -143,7 +143,7 @@ function Profile() {
 
     return (
         <div className="container container-fluid">
-            <h1 className="text-center"> Welcome! {user} <span className="name"></span>How much time do you have?</h1>
+            <h1 className="text-center"> Welcome {user}! <span className="name"></span>How much time do you have?</h1>
             <InputGroup className="mb-3">
                 <FormControl
                     name="timeAvailable"
@@ -236,7 +236,7 @@ function Profile() {
                 <button type="submit" className="btn-sm btn-primary"
                     onClick={handleFormSubmit}
                     disabled={!(formObject.timeAvailable)}>
-                    Update Profile
+                    Save Profile
                 </button>
                 <button type="submit" className="btn-sm btn-primary"
                     onClick={() => logout(userId)}>

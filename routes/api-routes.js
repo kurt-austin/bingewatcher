@@ -9,7 +9,7 @@ module.exports = function(app) {
   // If the user has valid login credentials, send them to the members page.
   // Otherwise the user will be sent an error
   app.post("/api/login", passport.authenticate("local"), (req, res) => {
-    console.log("where am i",req.body)
+    // console.log("where am i",req.body)
     // Sending back a password, even a hashed password, isn't a good idea
     res.json(req.user);
   });
@@ -129,6 +129,7 @@ module.exports = function(app) {
 
   //route to get user tv shows by id
   app.get("/api/user_tv_shows/:id",async (req,res) => {
+    console.log("***getting list of tv shows***");
     const userId = parseInt(req.params.id);
     try {
       if (!isNaN(userId)) {
@@ -180,7 +181,7 @@ module.exports = function(app) {
       // UserId: 6
     })
       .then(() => {
-        console.log("I made it here")
+        // console.log("I made it here")
         res.end();
       })
       .catch(err => {
@@ -236,14 +237,27 @@ module.exports = function(app) {
     });
   });
 
+
+  /*
+    app.get("/api/user_tv_shows/:id",async (req,res) => {
+    console.log("***getting list of tv shows***");
+    const userId = parseInt(req.params.id);
+  */
   //route to get a specific tv show's detail for a user
-  app.get("/api/user_tv_show",async (req,res) => {
-    const id = req.body.id;
-    const UserId = req.body.UserId;
+  app.get("/api/user_tv_show/:id",async (req,res) => {
+    console.log("***geting show details***");
+    // console.log("req.body: ");
+    // console.log(req);
+    // console.log(res.data);
+    const id = parseInt(req.params.id);
+    // const UserId = parseInt(req.body.UserId);
+    console.log("id: "+ id);
+    // console.log("UserId: "+ UserId);
     // const id = 1;
     // const UserId = 1;
     try {
-      if (!isNaN(id) && !isNaN(UserId)) {
+      // if (!isNaN(id) && !isNaN(UserId)) {
+      if (!isNaN(id)) {
         const [results, metadata] = await db.sequelize.query(`
         select 
           *,
@@ -252,12 +266,12 @@ module.exports = function(app) {
             else 0
           end timeLeft,
           case
-            when (((runtime*numOfEpisodes)/60) - timeLogged) > 0 then date_format(date_add(curdate(), INTERVAL ceiling((((runtime*numOfEpisodes)/60) - timeLogged)/timeBudgeted) WEEK),'%d/%m/%Y')
+            when (((runtime*numOfEpisodes)/60) - timeLogged) > 0 then date_format(date_add(curdate(), INTERVAL ceiling((((runtime*numOfEpisodes)/60) - timeLogged)/timeBudgeted) WEEK),'%m/%d/%Y')
             else "ALREADY COMPLETED"
           end estimatedCompletionDate
         from Tv_shows t
-        where t.UserId = ${UserId}
-          and t.id = ${id}`);
+        where t.id = ${id}`
+          );
         res.json(results);
       } else {
         res.json([])
