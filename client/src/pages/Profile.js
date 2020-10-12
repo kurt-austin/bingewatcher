@@ -6,7 +6,7 @@ import API from "../components/utils/API";
 // https://react-bootstrap.netlify.app/getting-started/introduction/
 import { InputGroup, FormControl, Button, ButtonToolbar, ListGroupItem } from 'react-bootstrap';
 
-
+var uid = -1;
 
 function Profile() {
     // Setting our component's initial state
@@ -22,12 +22,20 @@ function Profile() {
 
     // Load all shows and store them with setShows
     useEffect(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        for(var pair of urlParams.entries()) {
+          // console.log(pair[0]+ ', '+ pair[1]);
+          if (pair[0] === "uid") {
+            uid = pair[1];
+          }
+       }
         console.log("location info: ");
         console.log(location);
         console.log("location userId: " + location.userId);
-        setUserId(location.userId);
-        getShows(location.userId);
-        getUserProfile(location.userId);
+        console.log("uid: "+uid);
+        setUserId(location.userId||uid);
+        getShows(location.userId||uid);
+        getUserProfile(location.userId||uid);
         // getShows(userId);
         // getUserProfile(userId);
         //get user info
@@ -113,7 +121,8 @@ function Profile() {
     };
 
     function search(userId) {
-        history.push({ pathname: "/Search", userId: userId })
+        window.location.href = "/Search?uid="+userId;
+        // history.push({ pathname: "/Search?userId="+userId, userId: userId })
     };
 
     function detailsPage(id, UserId) {
