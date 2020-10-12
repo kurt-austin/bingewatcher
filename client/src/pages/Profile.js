@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Link, useHistory } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, useHistory, useLocation } from "react-router-dom";
 import API from "../components/utils/API";
 import Jumbotron from '../components/Jumbotron';
 // https://react-bootstrap.netlify.app/getting-started/introduction/
@@ -12,9 +12,13 @@ function Profile() {
     const [shows, setShows] = useState([])
     const [formObject, setFormObject] = useState({ timeAvailable: 0 })
     let history = useHistory();
+    const location = useLocation()
 
     // Load all shows and store them with setShows
     useEffect(() => {
+        console.log("location info: ");
+        console.log(location);
+        console.log("location userId: " + location.userId);
         getShows()
         //get user info
         fetch("api/user_data").then(encoded=>encoded.json()).then(data=>console.log(data))

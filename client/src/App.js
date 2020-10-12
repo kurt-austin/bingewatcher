@@ -24,7 +24,7 @@ function App() {
       <Route exact path="/Search" component={Search} />
       <Route exact path="/" component={Signup} />
       <Route exact path="/Profile" component={Profile} />
-      <Route exact path="/login" component={NotApp} />
+      {/* <Route exact path="/login" component={NotApp} /> */}
       <Route exact path="/Details" component={Details} />
       {/* <Footer /> */}
       <Footer />
