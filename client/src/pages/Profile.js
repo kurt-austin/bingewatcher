@@ -58,9 +58,9 @@ function Profile() {
             .catch(err => console.log(err));
     };
 
-    function deleteShow(tvShowId) {
-        API.deleteShow(tvShowId)
-            .then(res => getShows(location.userId))
+    function deleteShow(tvShowId,userShowId) {
+        API.deleteShow(tvShowId,userShowId)
+            .then(res => getShows(userShowId))
             .catch(err => console.log(err));
     }
 
@@ -191,7 +191,7 @@ function Profile() {
                                                         <a href="#" onClick={() => detailsPage(show.id, show.UserId)}>
                                                             <strong> Name: {show.name} Runtime: {show.runtime} </strong>
                                                         </a>
-                                                        <Button className="primary" onClick={deleteShow}>Delete Show</Button>
+                                                        <Button className="primary" onClick={() => deleteShow(show.id,show.UserId)}>Delete Show</Button>
                                                     </div>
                                                 </ul>)
                                             )
