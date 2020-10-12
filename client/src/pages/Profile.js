@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Link, useHistory, useLocation } from "react-router-dom";
+// import { BrowserRouter as Router, Route, Link, useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import API from "../components/utils/API";
-import Jumbotron from '../components/Jumbotron';
+// import Jumbotron from '../components/Jumbotron';
 // https://react-bootstrap.netlify.app/getting-started/introduction/
 import { InputGroup, FormControl, Button, ButtonToolbar, ListGroupItem } from 'react-bootstrap';
 
@@ -30,7 +31,7 @@ function Profile() {
         // getShows(userId);
         // getUserProfile(userId);
         //get user info
-        fetch("api/user_data").then(encoded=>encoded.json()).then(data=>console.log(data))
+        // fetch("api/user_data").then(encoded=>encoded.json()).then(data=>console.log(data))
     }, [])
 
     // Loads user profile info
@@ -70,7 +71,16 @@ function Profile() {
                 console.log(results)
                 window.location.href = "/"
             })
+            .catch(err => console.log(err));
+    }
 
+    function logout(UserId) {
+        API.logout(UserId)
+            .then(results => {
+                console.log(results)
+                window.location.href = "/"
+            })
+            .catch(err => console.log(err));
     }
 
     // Handles updating component state when the user types into the input field
@@ -96,6 +106,7 @@ function Profile() {
                     console.log(results)
                     window.location.href = "/Search"
                 })
+                .catch(err => console.log(err));
 
         };
     };
@@ -107,6 +118,7 @@ function Profile() {
                 console.log(id, UserId)
                 history.push({ pathname: "/Details", id, UserId })
             })
+            .catch(err => console.log(err));
         // console.log("I am here")
         // console.log(id)
         //     console.log(UserId)
@@ -159,7 +171,7 @@ function Profile() {
                             </div>
                         </div>
                     </div>
-                    {console.log(formObject.timeAvailable, "timeAvailable")}
+                    {/* {console.log(formObject.timeAvailable, "timeAvailable")} */}
                     {/* Shows in Progress  */}
                     <div className="col-xs-6 col-md-6">
                         <div className="card">
@@ -203,8 +215,12 @@ function Profile() {
             <br>
             </br>
             <div className="btn-group d-flex justify-content-center">
+            <button role="button" type="submit" className="btn-sm btn-primary"
+                    onClick={() => logout(userId)}>
+                    Logout
+                </button>
                 <button role="button" type="submit" className="btn-sm btn-primary"
-                    onClick={deleteUser}
+                    onClick={() => deleteUser(userId)}
                 > Delete Profile
                 </button>
                 <button role="button" type="submit" className="btn-sm btn-primary"
@@ -212,6 +228,7 @@ function Profile() {
                     disabled={!(formObject.timeAvailable)}>
                     Continue
                 </button>
+
             </div>
         </div >
     );

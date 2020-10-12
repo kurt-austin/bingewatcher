@@ -1,6 +1,7 @@
 import Axios from 'axios';
 import React, { useRef } from 'react';
-import {Route, Redirect, useHistory} from "react-router-dom";
+// import {Route, Redirect, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 // import Jumbotron from '../components/Jumbotron';
 
 function Signup() {

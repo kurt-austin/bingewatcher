@@ -2,6 +2,11 @@ import axios from "axios";
 
 const BASEURL = "https://www.episodate.com/api/search?=";
 export default {
+    // logout the user
+    logout: function () {
+        return axios.get("/logout");
+    },
+    // search for a show to add
     search: function (query) {
         return axios.get(BASEURL + query);
     },
@@ -17,6 +22,8 @@ export default {
     // Deletes the user using the user id
     deleteUser: function (UserId) {
         console.log("deleteUser")
+        console.log("UserId")
+        console.log(UserId)
         return axios.delete("/api/user_data/" + UserId);
     },
     // Deletes the show with the given id

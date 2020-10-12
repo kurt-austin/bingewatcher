@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 //import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Signup from "./pages/Signup";
-import NotApp from "./pages/NotApp"
+// import NotApp from "./pages/NotApp"
 import Profile from "./pages/Profile"
 import Details from "./pages/Details";
 import Footer from './components/footer';
