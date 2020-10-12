@@ -83,6 +83,7 @@ module.exports = function(app) {
   //   let id = 1;
   //   let timeAvailable = 5.5;
   app.put("/api/user_update", (req, res) => {
+    console.log(req.body);
     let id = req.body.id;
     let timeAvailable = req.body.timeAvailable;
     db.User.update({

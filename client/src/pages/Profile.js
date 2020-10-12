@@ -9,8 +9,13 @@ import { InputGroup, FormControl, Button, ButtonToolbar, ListGroupItem } from 'r
 
 function Profile() {
     // Setting our component's initial state
-    const [shows, setShows] = useState([])
-    const [formObject, setFormObject] = useState({ timeAvailable: 0 })
+    const [shows, setShows] = useState([]);
+    const [user, setUser] = useState("");
+    const [userId, setUserId] = useState(-1);
+    const [timeAvailable, setTimeAvailable] = useState(0);
+    const [totalBudgeted, setTotalBudgeted] = useState(0);
+    const [budgetStatus, setBudgetStatus] = useState("FULLYBUDGETED");
+    const [formObject, setFormObject] = useState({ timeAvailable: 0 });
     let history = useHistory();
     const location = useLocation()
 
@@ -19,14 +24,32 @@ function Profile() {
         console.log("location info: ");
         console.log(location);
         console.log("location userId: " + location.userId);
-        getShows()
+        setUserId(location.userId);
+        getShows(location.userId);
+        getUserProfile(location.userId);
+        // getShows(userId);
+        // getUserProfile(userId);
         //get user info
         fetch("api/user_data").then(encoded=>encoded.json()).then(data=>console.log(data))
     }, [])
 
+    // Loads user profile info
+    function getUserProfile(UserId) {
+        API.getUserProfile(UserId)
+            .then(res => {
+                const userInfo = res.data[0];
+                setUser(userInfo.userName);
+                setTimeAvailable(userInfo.timeAvailable);
+                setTotalBudgeted(userInfo.totalBudgeted);
+                setBudgetStatus(userInfo.budgetStatus);
+                setFormObject({ ...formObject, timeAvailable: userInfo.timeAvailable })
+            })
+            .catch(err => console.log(err));
+    };
+
     // Loads all shows and sets them to shows
-    function getShows() {
-        API.getShows()
+    function getShows(UserId) {
+        API.getShows(UserId)
             .then(res => {
                 console.log(res.data)
                 setShows(res.data)
@@ -36,7 +59,7 @@ function Profile() {
 
     function deleteShow(tvShowId) {
         API.deleteShow(tvShowId)
-            .then(res => getShows())
+            .then(res => getShows(location.userId))
             .catch(err => console.log(err));
     }
 
@@ -65,7 +88,7 @@ function Profile() {
         if (formObject.timeAvailable) {
             const user_data = {
                 // we need to get userID from login
-                id: 1,
+                id: userId,
                 timeAvailable: formObject.timeAvailable
             }
             API.saveUserSelection(user_data)
@@ -94,7 +117,7 @@ function Profile() {
 
     return (
         <div className="container container-fluid">
-            <h1 className="text-center"> Welcome! <span class= "name"></span>How much time do you have?</h1>
+            <h1 className="text-center"> Welcome! {user} <span className="name"></span>How much time do you have?</h1>
             <InputGroup className="mb-3">
                 <FormControl
                     name="timeAvailable"
