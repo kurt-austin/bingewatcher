@@ -3,6 +3,7 @@ import { CardImg } from 'react-bootstrap';
 import Jumbotron from '../components/Jumbotron';
 import "../pages/signupStyles.css";
 
+
 function Signup() {
     //const [password,setPassword]= useState (""),
     // const [signupState, setSignupState] = useState({
@@ -72,6 +73,8 @@ function Signup() {
                     <div className = "form-group"></div>
                     <input placeholder="password" ref={passRef}></input>
                 </div>
+                <br>
+                </br>
                <div className = "footer">
                <button type="button" className ="btn" onClick={() => doIt()}>Log In</button>
                </div>
@@ -85,9 +88,12 @@ function Signup() {
                     <div className = "form-group"></div>
                     <input placeholder="password" ref={passRef}></input>
                 </div>
-
+                <br>
+                </br>
+                <div className = "footer">
                 <button type ="button" className ="btn"onClick={() => doIt()}>Register</button>
                 {/* <button onClick={() => doIt()}>Login</button> */}
+                </div>
             </div>
             </card>
             </div>

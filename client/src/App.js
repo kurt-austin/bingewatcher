@@ -20,7 +20,7 @@ function App() {
   return (
     <Router>
       {/* <Navbar /> */}
-      <h1>title</h1>
+      <h1></h1>
       <Jumbotron />
       {/* <Route exact path="/" component={Home} /> */}
       <Route exact path="/Search" component={Search} />

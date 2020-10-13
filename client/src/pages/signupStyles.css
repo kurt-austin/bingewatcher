@@ -1,3 +1,7 @@
+.header{
+    font-size: x-large;
+    color: magenta s;
+}
 .base-container{
     text-align: center;
     /* background-color: royalblue; */
@@ -15,7 +19,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: lightcoral;
+    /* background-color: lightcoral; */
 }
 .form-group{
     display: flex;
@@ -39,8 +43,18 @@ input{
   :focus{
       outline: none;
       box-shadow: lightslategray;
-      
 
+
+ }
+ .footer{
+ background-color: lightblue;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
  }
 
 
