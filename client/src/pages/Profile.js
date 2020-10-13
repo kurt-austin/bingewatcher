@@ -69,7 +69,7 @@ function Profile() {
 
     return (
         <div className="container container-fluid">
-            <h1 className="text-center"> Welcome! <span class= "name"></span>How much time do you have?</h1>
+            <h1 className="text-center"> Welcome! <span className= "name"></span>How much time do you have?</h1>
             <InputGroup className="mb-3">
                 <FormControl
                     name="timeAvailable"

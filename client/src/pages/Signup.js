@@ -21,15 +21,15 @@ function Signup() {
         SignupUser(userRef.current.value, passRef.current.value)
       
     }
-    function SignupUser(username, password) {
-        fetch("/api/signup", {
+    function SignupUser(userName, password) {
+        fetch("/api/ignup", {
             method: "POST",
             headers: {
-                'Content-Type': 'application/json'
-                // 'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Type': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded',
               },
             body:JSON.stringify({
-                userName: username,
+                userName: userName,
                 password: password
 
         })})
@@ -49,7 +49,7 @@ function Signup() {
         <div className ="card-header">
         <div className="app">
             <div>
-                <card>
+               
                
                 
             <div className = "base-container">
@@ -61,10 +61,10 @@ function Signup() {
                     </div>
                 </div>
                 </div>
-                </card>
+                
                 </div>
                 <div className = "card-body">
-                <card>
+                
                     <div className= "card-body">
                 <div className = "form">
                     <div className = "form-group">
@@ -95,7 +95,7 @@ function Signup() {
                 {/* <button onClick={() => doIt()}>Login</button> */}
                 </div>
             </div>
-            </card>
+           
             </div>
             </div>
             </div>
