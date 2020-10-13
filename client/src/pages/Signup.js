@@ -1,5 +1,7 @@
 import React, { useRef,useState } from 'react';
+import { CardImg } from 'react-bootstrap';
 import Jumbotron from '../components/Jumbotron';
+import "../pages/signupStyles.css";
 
 function Signup() {
     //const [password,setPassword]= useState (""),
@@ -43,18 +45,26 @@ function Signup() {
 
     return (
 
-
+        <div className ="card-header">
         <div className="app">
             <div>
+                <card>
+               
+                
             <div className = "base-container">
                 <div className = "header">Login</div>
                 <div className = "content">
                     <div className = "image">
-                        <img src ="https://img.jakpost.net/c/2019/12/24/2019_12_24_83946_1577167027._large.jpg" height= "100px" width ="200px">
+                        <img src ="https://i.ndtvimg.com/i/2016-07/television-generic_650x400_81469541532.jpg" height= "200px" width ="300px" >
                             </img>
                     </div>
                 </div>
                 </div>
+                </card>
+                </div>
+                <div className = "card-body">
+                <card>
+                    <div className= "card-body">
                 <div className = "form">
                     <div className = "form-group">
                     <input placeholder="username" ref={userRef}></input>
@@ -63,16 +73,28 @@ function Signup() {
                     <input placeholder="password" ref={passRef}></input>
                 </div>
                <div className = "footer">
-               <button onClick={() => doIt()}>Log In</button>
+               <button type="button" className ="btn" onClick={() => doIt()}>Log In</button>
                </div>
             
                 <br></br>
-                <button onClick={() => doIt()}>Register</button>
-                <button onClick={() => doIt()}>Login</button>
-            
+                <div className ="header">Register</div>
+                <div className = "form">
+                    <div className = "form-group">
+                    <input placeholder="username" ref={userRef}></input>
+                    </div>
+                    <div className = "form-group"></div>
+                    <input placeholder="password" ref={passRef}></input>
+                </div>
 
+                <button type ="button" className ="btn"onClick={() => doIt()}>Register</button>
+                {/* <button onClick={() => doIt()}>Login</button> */}
             </div>
-        </div>
+            </card>
+            </div>
+            </div>
+            </div>
+            
+    
 
     );
 }
