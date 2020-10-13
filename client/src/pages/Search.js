@@ -114,6 +114,8 @@ class Search extends Component {
 
   render() {
     const result = this.state.result;
+    console.log("result");
+    console.log(result);
     
 
     return (
@@ -153,7 +155,7 @@ class Search extends Component {
                 )}
             </Card>
               <br/>
-              <button onClick={this.reDirecttoProfile}>Profile</button>
+              <button onClick={this.reDirecttoProfile}>Back to Profile</button>
           </Col>
           <Col size="md-4">
             <Card heading="Search">
