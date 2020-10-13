@@ -1,3 +1,5 @@
+import React from "react";
+import images from "./cup2";
 function Login() {
     const userRef = useRef()
     const passRef = useRef()
@@ -26,8 +28,13 @@ function Login() {
 
 
         <div className="app">
-            <div>
-                <h1>Login</h1>
+            <div className = "base-container">
+                <div className = "header">Login</div>
+                <div className = "content">
+                    <div className = "image">
+                        <img src = {images}/>
+                    </div>
+                </div>
                 <input placeholder="username" ref={userRef}></input>
                 <input placeholder="password" ref={passRef}></input>
                 <br></br>

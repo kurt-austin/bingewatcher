@@ -53,7 +53,7 @@ function NotApp() {
         <div className="login">
             <h1>BingeWatcher</h1>
             <h2>Login</h2>
-            <input onSubmit ={handleSubmit}placeholder="username" ref={userRef}></input>
+            <input placeholder="username" ref={userRef}></input>
             <input placeholder="password" ref={passRef}>
             </input>
 

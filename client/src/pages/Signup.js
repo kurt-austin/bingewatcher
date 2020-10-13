@@ -46,10 +46,26 @@ function Signup() {
 
         <div className="app">
             <div>
-                <h1>Register</h1>
-                <input placeholder="username" ref={userRef}></input>
-            <input placeholder="password" ref={passRef}></input>
-            <button onClick={() => doIt()}>Log In</button>
+            <div className = "base-container">
+                <div className = "header">Login</div>
+                <div className = "content">
+                    <div className = "image">
+                        <img src ="https://img.jakpost.net/c/2019/12/24/2019_12_24_83946_1577167027._large.jpg" height= "100px" width ="200px">
+                            </img>
+                    </div>
+                </div>
+                </div>
+                <div className = "form">
+                    <div className = "form-group">
+                    <input placeholder="username" ref={userRef}></input>
+                    </div>
+                    <div className = "form-group"></div>
+                    <input placeholder="password" ref={passRef}></input>
+                </div>
+               <div className = "footer">
+               <button onClick={() => doIt()}>Log In</button>
+               </div>
+            
                 <br></br>
                 <button onClick={() => doIt()}>Register</button>
                 <button onClick={() => doIt()}>Login</button>
