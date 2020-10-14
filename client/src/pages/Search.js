@@ -17,21 +17,21 @@ class Search extends Component {
   componentDidMount () {
     const urlParams = new URLSearchParams(window.location.search);
     for(var pair of urlParams.entries()) {
-      // console.log(pair[0]+ ', '+ pair[1]);
+
       if (pair[0] === "uid") {
         uid = pair[1];
       }
    }
-  //  console.log(uid);
+ 
   }
 
   async searchTVshows(value) {
    this.setState({result: []} )
    await axios.get("https://episodate.com/api/search?q=" + value)
       .then(res => {
-        console.log(res.data);
+ 
         const tvShowFound = res.data.tv_shows;
-        // const tvShowFound = res.data.tv_shows.filter(tvShows => tvShows.name.includes(`${value}`));
+ 
         const tvId = tvShowFound.map(result => result.id)
         for (let i = 0; i < tvId.length; i++) {
           this.searchDetail(tvId[i]);
@@ -60,19 +60,8 @@ class Search extends Component {
   }
 
   async saveToList ({result}) {
-  //   console.log("saveToList:");
-  //  console.log({result})
-  //  console.log(result)
-  //  console.log(result.description)
-  //  console.log(result.id)
-  //  console.log(result.image_path)
-  //  console.log(result.runtime)
-  //  console.log(result.episodes.length)
-  //  console.log(result.genres.join(','))
-  //  console.log(result.name);
-  //  result.UserId=1;
-  result.UserId=uid;
-  //  console.log(result.UserId);
+    result.UserId=uid;
+  
    
   //  Here is where I call the API and then I need to create a post/create method
   // in that file.
@@ -114,8 +103,6 @@ class Search extends Component {
 
   render() {
     const result = this.state.result;
-    console.log("result");
-    console.log(result);
     
 
     return (
@@ -135,12 +122,7 @@ class Search extends Component {
                       <h3>{result.name}</h3>
                       <li key={result.id} className="list-group-item">
                         <p>{result.description}</p>
-                        {/* <p>{result.rating}</p>
-                        <p>{result.genre}</p>
-                        <p>{result.runtime}</p>
-                        <p>{result.numOfEpisodes}</p>
-                        <p>{result.UserId}</p> */}
-                        <img src={result.image_thumbnail_path} />
+                          <img src={result.image_thumbnail_path} />
                         <br/>
                         <br/>
                         <button onClick={() => this.saveToList({result})}>Save</button>
