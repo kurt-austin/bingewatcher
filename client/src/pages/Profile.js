@@ -6,6 +6,10 @@ import API from "../components/utils/API";
 // https://react-bootstrap.netlify.app/getting-started/introduction/
 import { InputGroup, FormControl, Button, ButtonToolbar, ListGroupItem } from 'react-bootstrap';
 
+
+
+
+
 var uid = -1;
 
 function Profile() {
@@ -23,19 +27,19 @@ function Profile() {
     // Load all shows and store them with setShows
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
-        for(var pair of urlParams.entries()) {
-          // console.log(pair[0]+ ', '+ pair[1]);
-          if (pair[0] === "uid") {
-            uid = pair[1];
-          }
-       }
+        for (var pair of urlParams.entries()) {
+            // console.log(pair[0]+ ', '+ pair[1]);
+            if (pair[0] === "uid") {
+                uid = pair[1];
+            }
+        }
         // console.log("location info: ");
         // console.log(location);
         // console.log("location userId: " + location.userId);
         // console.log("uid: "+uid);
-        setUserId(location.userId||uid);
-        getShows(location.userId||uid);
-        getUserProfile(location.userId||uid);
+        setUserId(location.userId || uid);
+        getShows(location.userId || uid);
+        getUserProfile(location.userId || uid);
         // getShows(userId);
         // getUserProfile(userId);
         //get user info
@@ -66,8 +70,8 @@ function Profile() {
             .catch(err => console.log(err));
     };
 
-    function deleteShow(tvShowId,userShowId) {
-        API.deleteShow(tvShowId,userShowId)
+    function deleteShow(tvShowId, userShowId) {
+        API.deleteShow(tvShowId, userShowId)
             .then(res => getShows(userShowId))
             .catch(err => console.log(err));
     }
@@ -81,7 +85,7 @@ function Profile() {
             })
             .catch(err => console.log(err));
     }
-
+    // Logs out a user from the database with a given id, then redirects them to the home page
     function logout(UserId) {
         API.logout(UserId)
             .then(results => {
@@ -121,7 +125,7 @@ function Profile() {
     };
 
     function search(userId) {
-        window.location.href = "/Search?uid="+userId;
+        window.location.href = "/Search?uid=" + userId;
         // history.push({ pathname: "/Search?userId="+userId, userId: userId })
     };
 
@@ -130,9 +134,9 @@ function Profile() {
         //     .then(results => {
         //         console.log("history.push")
         //         console.log(id, UserId)
-                history.push({ pathname: "/Details", id, UserId })
-            // })
-            // .catch(err => console.log(err));
+        history.push({ pathname: "/Details", id, UserId })
+        // })
+        // .catch(err => console.log(err));
         // console.log("I am here")
         // console.log(id)
         //     console.log(UserId)
@@ -143,14 +147,13 @@ function Profile() {
 
     return (
         <div className="container container-fluid">
-            <h1 className="text-center"> Welcome {user}! <span className="name"></span>How much time do you have?</h1>
+            <h1 className="text-center"> Welcome {user}! <span className="name"></span>How much time do you have in a week?</h1>
             <InputGroup className="mb-3">
                 <FormControl
                     name="timeAvailable"
                     onChange={handleInputChange}
                     type="number"
                     className="form-control"
-                    placeholder="Enter how much time you have available in a week (hours)"
                     // By entering a value, we are creating a controlled input (whatever value we set in state)
                     value={formObject.timeAvailable}
                 />
@@ -200,7 +203,7 @@ function Profile() {
                                                         <a href="#" onClick={() => detailsPage(show.id, show.UserId)}>
                                                             <strong> Name: {show.name} Runtime: {show.runtime} </strong>
                                                         </a>
-                                                        <Button className="primary" onClick={() => deleteShow(show.id,show.UserId)}>Delete Show</Button>
+                                                        <Button className="primary" onClick={() => deleteShow(show.id, show.UserId)}>Delete Show</Button>
                                                     </div>
                                                 </ul>)
                                             )
@@ -208,19 +211,6 @@ function Profile() {
 
                                     </ListGroupItem>
                                 </ButtonToolbar>
-
-                                {/* <ul className="card-text">
-                                    {shows.length > 0 ? (
-                                        shows.filter(show => show.showStatus === "INPROGRESS").map(show => (
-                                            <ul key={show.id}>
-                                                <Link to={"/api/user_tv_shows/:id"}>
-                                                    <strong> Name: {show.name} Length: {show.runtime} </strong>
-                                                </Link>
-                                            </ul>)
-                                        )
-                                    ) : (<p>No results to display</p>)}
-
-                                </ul> */}
                             </div>
                         </div>
                     </div>
@@ -229,23 +219,27 @@ function Profile() {
             <br>
             </br>
             <div className="btn-group d-flex justify-content-center">
-                <button type="submit" className="btn-sm btn-primary"
+                <Button type="submit" size="sm" className="buttons"
                     onClick={() => search(userId)}>
                     Search Shows
-                </button>
-                <button type="submit" className="btn-sm btn-primary"
+                </Button>
+                &nbsp;
+                <Button type="submit" size="sm" className="button"
                     onClick={handleFormSubmit}
                     disabled={!(formObject.timeAvailable)}>
                     Save Profile
-                </button>
-                <button type="submit" className="btn-sm btn-primary"
+                </Button>
+                &nbsp;
+                <Button type="submit" size="sm" className="button"
                     onClick={() => logout(userId)}>
                     Logout
-                </button>
-                <button type="submit" className="btn-sm btn-primary"
+                </Button>
+                &nbsp;
+                <Button type="submit" size="sm" className="button"
                     onClick={() => deleteUser(userId)}
                 > Delete Profile
-                </button>
+                </Button>
+                &nbsp;
 
 
             </div>

@@ -3,7 +3,9 @@
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: blue;
+    height: 70px;
+    background-color: #FFB52E;
     color: white;
     text-align: center;
+    font-style: italic;
   }

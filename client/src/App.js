@@ -8,6 +8,7 @@ import Signup from "./pages/Signup";
 import Profile from "./pages/Profile"
 import Details from "./pages/Details";
 import Footer from './components/footer';
+// import './App.css';
 
 //import footer from "./components/footer";
 //import navbar from "./components/navbar";
