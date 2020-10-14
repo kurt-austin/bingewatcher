@@ -33,7 +33,6 @@ function Details(props) {
   
     function handleInputChange(event) {
         const { name, value } = event.target;
-        console.log(event.target)
         setFormObject({ ...formObject, [name]: value })
     };
 
