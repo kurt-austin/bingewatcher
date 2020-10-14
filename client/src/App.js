@@ -9,7 +9,7 @@ import Signup from "./pages/Signup";
 
 import Profile from "./pages/Profile"
 import Details from "./pages/Details";
-import Footer from './components/footer';
+// import Footer from './components/footer';
 
 
 
@@ -28,7 +28,7 @@ function App() {
  
       <Route exact path="/Details" component={Details} />
  
-      <Footer />
+      {/* <Footer /> */}
     </Router>
   )
 
