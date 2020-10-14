@@ -4,7 +4,7 @@ function Login() {
     const userRef = useRef()
     const passRef = useRef()
     const doIt = () => {
-        console.log("we did it")
+
         loginUser(userRef.current.value, passRef.current.value)
     }
     function loginUser(username, password) {
@@ -15,7 +15,7 @@ function Login() {
         console.log(userName)
             .then((parameter) => {
 
-                debugger
+
                 window.location.replace("/Profile");
                 // If there's an error, log the error
             })
