@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
-// import { BrowserRouter as Router, Route, Link, useHistory, useLocation } from "react-router-dom";
 import { useHistory, useLocation } from "react-router-dom";
 import API from "../components/utils/API";
-// import Jumbotron from '../components/Jumbotron';
-// https://react-bootstrap.netlify.app/getting-started/introduction/
 import { InputGroup, FormControl, Button, ButtonToolbar, ListGroupItem } from 'react-bootstrap';
 
 var uid = -1;
@@ -29,17 +26,10 @@ function Profile() {
             uid = pair[1];
           }
        }
-        // console.log("location info: ");
-        // console.log(location);
-        // console.log("location userId: " + location.userId);
-        // console.log("uid: "+uid);
         setUserId(location.userId||uid);
         getShows(location.userId||uid);
         getUserProfile(location.userId||uid);
-        // getShows(userId);
-        // getUserProfile(userId);
-        //get user info
-        // fetch("api/user_data").then(encoded=>encoded.json()).then(data=>console.log(data))
+        
     }, [])
 
     // Loads user profile info
@@ -111,8 +101,8 @@ function Profile() {
             }
             API.saveUserSelection(user_data)
                 .then(results => {
-                    console.log(results)
-                    // window.location.href = "/Search"
+ 
+ 
                     history.push({ pathname: "/Profile", userId: userId })
                 })
                 .catch(err => console.log(err));
@@ -122,20 +112,10 @@ function Profile() {
 
     function search(userId) {
         window.location.href = "/Search?uid="+userId;
-        // history.push({ pathname: "/Search?userId="+userId, userId: userId })
     };
 
     function detailsPage(id, UserId) {
-        // API.userDetails(id, UserId)
-        //     .then(results => {
-        //         console.log("history.push")
-        //         console.log(id, UserId)
                 history.push({ pathname: "/Details", id, UserId })
-            // })
-            // .catch(err => console.log(err));
-        // console.log("I am here")
-        // console.log(id)
-        //     console.log(UserId)
     }
 
 
@@ -156,11 +136,7 @@ function Profile() {
                 />
             </InputGroup>
 
-            {/* <div className="container col-sm-6" onChange={this.onChangeValue}>
-                    <input type="radio" value="Day" name="day" /> By Day
-                     <input type="radio" value="Week" name="week" /> By Week
-                     </div> */}
-
+ 
             {/* Completed Shows */}
             <div className="container">
                 <div className="row">
@@ -185,7 +161,7 @@ function Profile() {
                             </div>
                         </div>
                     </div>
-                    {/* {console.log(formObject.timeAvailable, "timeAvailable")} */}
+
                     {/* Shows in Progress  */}
                     <div className="col-xs-6 col-md-6">
                         <div className="card">
@@ -209,18 +185,7 @@ function Profile() {
                                     </ListGroupItem>
                                 </ButtonToolbar>
 
-                                {/* <ul className="card-text">
-                                    {shows.length > 0 ? (
-                                        shows.filter(show => show.showStatus === "INPROGRESS").map(show => (
-                                            <ul key={show.id}>
-                                                <Link to={"/api/user_tv_shows/:id"}>
-                                                    <strong> Name: {show.name} Length: {show.runtime} </strong>
-                                                </Link>
-                                            </ul>)
-                                        )
-                                    ) : (<p>No results to display</p>)}
-
-                                </ul> */}
+ 
                             </div>
                         </div>
                     </div>
