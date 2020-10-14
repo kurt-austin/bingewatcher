@@ -56,7 +56,7 @@ function Signup() {
 
     return (
 
-        <div className ="card-header">
+        <div>
         <div className="app">
             <div>
             <card>
@@ -74,18 +74,10 @@ function Signup() {
                    <div className = "card-body">
                    <card>
                        <div className= "card-body">
-                   <div className = "form">
-                       <div className = "form-group">
-                       <input placeholder="username" ref={userRef}></input>
-                       </div>
-                       <div className = "form-group"></div>
-                       <input placeholder="password" ref={passRef}></input>
-                   </div>
+
                    <br>
                    </br>
- 
-                  <button type="button" className ="btn" onClick={() => login()}>Log In</button>
- 
+
                
                    <br></br>
                    <div className ="header">Register</div>
@@ -98,9 +90,12 @@ function Signup() {
                    </div>
                    <br>
                    </br>
+
    
+
                    <button type ="button" className ="btn"onClick={() => signUp()}>Register</button>
-   
+                   <button type="button" className ="btn" onClick={() => login()}>Log In</button>
+
                </div>
                </card>
                </div>

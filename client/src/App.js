@@ -1,4 +1,7 @@
 import React from 'react';
+
+import Jumbotron from './components/Jumbotron';
+
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Search from "./pages/Search";
@@ -15,7 +18,10 @@ import Footer from './components/footer';
 function App() {
   return (
     <Router>
- 
+
+      <Jumbotron />
+    
+
       <Route exact path="/Search" component={Search} />
       <Route exact path="/" component={Signup} />
       <Route exact path="/Profile" component={Profile} />

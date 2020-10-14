@@ -194,23 +194,26 @@ function Profile() {
             <br>
             </br>
             <div className="btn-group d-flex justify-content-center">
-                <button type="submit" className="btn-sm btn-primary"
+                <Button type="submit" className="btn-sm btn-primary"
                     onClick={() => search(userId)}>
                     Search Shows
-                </button>
-                <button type="submit" className="btn-sm btn-primary"
+                </Button>
+                &nbsp;
+                <Button type="submit" className="btn-sm btn-primary"
                     onClick={handleFormSubmit}
                     disabled={!(formObject.timeAvailable)}>
                     Save Profile
-                </button>
-                <button type="submit" className="btn-sm btn-primary"
+                </Button>
+                &nbsp;
+                <Button type="submit" className="btn-sm btn-primary"
                     onClick={() => logout(userId)}>
                     Logout
-                </button>
-                <button type="submit" className="btn-sm btn-primary"
+                </Button>
+                &nbsp;
+                <Button type="submit" className="btn-sm btn-primary"
                     onClick={() => deleteUser(userId)}
                 > Delete Profile
-                </button>
+                </Button>
 
 
             </div>
