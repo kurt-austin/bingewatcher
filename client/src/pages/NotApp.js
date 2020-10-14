@@ -14,13 +14,13 @@ function NotApp() {
     const emailRef = useRef()
 
     const doIt = () => {
-        console.log(userRef.current.value)
+ 
  
  
         loginUser(userRef.current.value, passRef.current.value)
     }
     function loginUser(userName, password) 
-        { console.log(userName,password)
+        { 
          fetch("/api/login", {
             method: "POST",
             headers: {
@@ -36,14 +36,14 @@ function NotApp() {
      
         
             .then((user) => {
-                console.log(user)
+ 
               history.push("/Profile");
                  // If there's an error, log the error
             })
          .catch(err => {
              console.log(err);
              });
-             console.log(useRef)
+ 
     }
     return (
         <div className="login">

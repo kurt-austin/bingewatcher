@@ -21,7 +21,7 @@ function Profile() {
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
         for (var pair of urlParams.entries()) {
-            // console.log(pair[0]+ ', '+ pair[1]);
+ 
             if (pair[0] === "uid") {
                 uid = pair[1];
             }
@@ -50,7 +50,7 @@ function Profile() {
     function getShows(UserId) {
         API.getShows(UserId)
             .then(res => {
-                console.log(res.data)
+ 
                 setShows(res.data)
             })
             .catch(err => console.log(err));
@@ -66,7 +66,7 @@ function Profile() {
     function deleteUser(UserId) {
         API.deleteUser(UserId)
             .then(results => {
-                console.log(results)
+    
                 window.location.href = "/"
             })
             .catch(err => console.log(err));
@@ -75,7 +75,7 @@ function Profile() {
     function logout(UserId) {
         API.logout(UserId)
             .then(results => {
-                console.log(results)
+
                 window.location.href = "/"
             })
             .catch(err => console.log(err));
@@ -84,7 +84,7 @@ function Profile() {
     // Handles updating component state when the user types into the input field
     function handleInputChange(event) {
         const { name, value } = event.target;
-        console.log(event.target)
+  
         setFormObject({ ...formObject, [name]: value })
     };
 
