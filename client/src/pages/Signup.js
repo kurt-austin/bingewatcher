@@ -78,6 +78,9 @@ function Signup() {
                    <br>
                    </br>
 
+        
+
+
                
                    <br></br>
                    <div className ="header">Register</div>
