@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
+.profile-heading {
+    font-family: 'Righteous', cursive;
+    color: #D0417E;
+}
+
+.background-color {
+    background-color: #FFFACD;
+}
+
+.profile-background {
+    background-color: papayawhip;
+}
+
+.profile-text {
+    color: #D0417E;
+    font-family: 'Righteous', cursive;
+}
+
+.no-results-style {
+    color: black;
+    font-family: 'Righteous', cursive;
+}
+
+.btn-group {
+    font-family: 'Righteous', cursive; 
+}
