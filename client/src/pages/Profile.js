@@ -1,25 +1,64 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+// import { BrowserRouter as Router, Route, Link, useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import API from "../components/utils/API";
-import Jumbotron from '../components/Jumbotron';
+// import Jumbotron from '../components/Jumbotron';
 // https://react-bootstrap.netlify.app/getting-started/introduction/
 import { InputGroup, FormControl, Button, ButtonToolbar, ListGroupItem } from 'react-bootstrap';
 
+var uid = -1;
+
 function Profile() {
     // Setting our component's initial state
-    const [shows, setShows] = useState([])
-    const [formObject, setFormObject] = useState({ timeAvailable: 0 })
+    const [shows, setShows] = useState([]);
+    const [user, setUser] = useState("");
+    const [userId, setUserId] = useState(-1);
+    const [timeAvailable, setTimeAvailable] = useState(0);
+    const [totalBudgeted, setTotalBudgeted] = useState(0);
+    const [budgetStatus, setBudgetStatus] = useState("FULLYBUDGETED");
+    const [formObject, setFormObject] = useState({ timeAvailable: 0 });
+    let history = useHistory();
+    const location = useLocation()
 
     // Load all shows and store them with setShows
     useEffect(() => {
-        getShows()
+        const urlParams = new URLSearchParams(window.location.search);
+        for(var pair of urlParams.entries()) {
+          // console.log(pair[0]+ ', '+ pair[1]);
+          if (pair[0] === "uid") {
+            uid = pair[1];
+          }
+       }
+        // console.log("location info: ");
+        // console.log(location);
+        // console.log("location userId: " + location.userId);
+        // console.log("uid: "+uid);
+        setUserId(location.userId||uid);
+        getShows(location.userId||uid);
+        getUserProfile(location.userId||uid);
+        // getShows(userId);
+        // getUserProfile(userId);
         //get user info
-        fetch("api/user_data").then(encoded=>encoded.json()).then(data=>console.log(data))
+        // fetch("api/user_data").then(encoded=>encoded.json()).then(data=>console.log(data))
     }, [])
 
+    // Loads user profile info
+    function getUserProfile(UserId) {
+        API.getUserProfile(UserId)
+            .then(res => {
+                const userInfo = res.data[0];
+                setUser(userInfo.userName);
+                setTimeAvailable(userInfo.timeAvailable);
+                setTotalBudgeted(userInfo.totalBudgeted);
+                setBudgetStatus(userInfo.budgetStatus);
+                setFormObject({ ...formObject, timeAvailable: userInfo.timeAvailable })
+            })
+            .catch(err => console.log(err));
+    };
+
     // Loads all shows and sets them to shows
-    function getShows() {
-        API.getShows()
+    function getShows(UserId) {
+        API.getShows(UserId)
             .then(res => {
                 console.log(res.data)
                 setShows(res.data)
@@ -27,16 +66,28 @@ function Profile() {
             .catch(err => console.log(err));
     };
 
-    function deleteShow(tvShowId) {
-        API.deleteShow(tvShowId)
-            .then(res => getShows())
+    function deleteShow(tvShowId,userShowId) {
+        API.deleteShow(tvShowId,userShowId)
+            .then(res => getShows(userShowId))
             .catch(err => console.log(err));
     }
 
     // Deletes a user from the database with a given id, then redirects to the home page (signup)
     function deleteUser(UserId) {
         API.deleteUser(UserId)
-            .then((res) => res.redirect("/"))
+            .then(results => {
+                console.log(results)
+                window.location.href = "/"
+            })
+            .catch(err => console.log(err));
+    }
+
+    function logout(UserId) {
+        API.logout(UserId)
+            .then(results => {
+                console.log(results)
+                window.location.href = "/"
+            })
             .catch(err => console.log(err));
     }
 
@@ -55,21 +106,44 @@ function Profile() {
         if (formObject.timeAvailable) {
             const user_data = {
                 // we need to get userID from login
-                id: 1,
+                id: userId,
                 timeAvailable: formObject.timeAvailable
             }
             API.saveUserSelection(user_data)
                 .then(results => {
                     console.log(results)
-                    window.location.href = "/Search"
+                    // window.location.href = "/Search"
+                    history.push({ pathname: "/Profile", userId: userId })
                 })
+                .catch(err => console.log(err));
 
         };
     };
 
+    function search(userId) {
+        window.location.href = "/Search?uid="+userId;
+        // history.push({ pathname: "/Search?userId="+userId, userId: userId })
+    };
+
+    function detailsPage(id, UserId) {
+        // API.userDetails(id, UserId)
+        //     .then(results => {
+        //         console.log("history.push")
+        //         console.log(id, UserId)
+                history.push({ pathname: "/Details", id, UserId })
+            // })
+            // .catch(err => console.log(err));
+        // console.log("I am here")
+        // console.log(id)
+        //     console.log(UserId)
+    }
+
+
+
+
     return (
         <div className="container container-fluid">
-            <h1 className="text-center"> Welcome! <span className= "name"></span>How much time do you have?</h1>
+            <h1 className="text-center"> Welcome {user}! <span className="name"></span>How much time do you have?</h1>
             <InputGroup className="mb-3">
                 <FormControl
                     name="timeAvailable"
@@ -99,9 +173,9 @@ function Profile() {
                                         {shows.length > 0 ? (
                                             shows.filter(show => show.showStatus === "COMPLETED").map(show => (
                                                 <ul key={show.id}>
-                                                    <Link to={"/api/user_tv_shows/:id"}>
-                                                        <strong> Name: {show.name} Length: {show.runtime} </strong>
-                                                    </Link>
+                                                    {/* <Link to={detailsPage}> */}
+                                                    <strong> Name: {show.name} Length: {show.runtime} </strong>
+                                                    {/* </Link> */}
                                                 </ul>)
                                             )
                                         ) : (<p>No results to display</p>)}
@@ -111,7 +185,7 @@ function Profile() {
                             </div>
                         </div>
                     </div>
-                    {console.log(formObject.timeAvailable, "timeAvailable")}
+                    {/* {console.log(formObject.timeAvailable, "timeAvailable")} */}
                     {/* Shows in Progress  */}
                     <div className="col-xs-6 col-md-6">
                         <div className="card">
@@ -122,10 +196,12 @@ function Profile() {
                                         {shows.length > 0 ? (
                                             shows.filter(show => show.showStatus === "INPROGRESS").map(show => (
                                                 <ul key={show.id}>
-                                                    <Link to={"/api/user_tv_shows/:id"}>
-                                                        <strong> Name: {show.name} Length: {show.runtime} </strong>
-                                                        <Button bsStyle="primary" onClick={deleteShow}>Delete Show</Button>
-                                                    </Link>
+                                                    <div>
+                                                        <a href="#" onClick={() => detailsPage(show.id, show.UserId)}>
+                                                            <strong> Name: {show.name} Runtime: {show.runtime} </strong>
+                                                        </a>
+                                                        <Button className="primary" onClick={() => deleteShow(show.id,show.UserId)}>Delete Show</Button>
+                                                    </div>
                                                 </ul>)
                                             )
                                         ) : (<p>No results to display</p>)}
@@ -149,21 +225,31 @@ function Profile() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
             <br>
             </br>
             <div className="btn-group d-flex justify-content-center">
-                <button role="button" type="submit" className="btn-sm btn-primary"
-                    onClick={deleteUser}
-                > Delete Profile
+                <button type="submit" className="btn-sm btn-primary"
+                    onClick={() => search(userId)}>
+                    Search Shows
                 </button>
-                <button role="button" type="submit" className="btn-sm btn-primary"
+                <button type="submit" className="btn-sm btn-primary"
                     onClick={handleFormSubmit}
                     disabled={!(formObject.timeAvailable)}>
-                    Continue
+                    Save Profile
                 </button>
+                <button type="submit" className="btn-sm btn-primary"
+                    onClick={() => logout(userId)}>
+                    Logout
+                </button>
+                <button type="submit" className="btn-sm btn-primary"
+                    onClick={() => deleteUser(userId)}
+                > Delete Profile
+                </button>
+
+
             </div>
-        </div>
+        </div >
     );
 }
 

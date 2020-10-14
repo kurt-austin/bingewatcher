@@ -1,16 +1,7 @@
 {
 	"folders": [
 		{
-			"path": "../../../.."
-		},
-		{
-			"path": "../../../../../nu-eva-fsf-pt-04-2020-u-c/20-State/01-Activities"
-		},
-		{
-			"path": "../../../../../nu-eva-fsf-pt-04-2020-u-c/19-React/01-Activities"
-		},
-		{
-			"path": "../../../../../nu-eva-fsf-pt-04-2020-u-c/19-React"
+			"path": "../../.."
 		}
 	],
 	"settings": {}

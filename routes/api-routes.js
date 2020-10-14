@@ -9,7 +9,7 @@ module.exports = function(app) {
   // If the user has valid login credentials, send them to the members page.
   // Otherwise the user will be sent an error
   app.post("/api/login", passport.authenticate("local"), (req, res) => {
-    console.log("where am i",req.body)
+    // console.log("where am i",req.body)
     // Sending back a password, even a hashed password, isn't a good idea
     res.json(req.user);
   });
@@ -26,14 +26,13 @@ module.exports = function(app) {
   // otherwise send back an error
   app.post("/api/Signup", (req, res) => {
   // app.get("/api/signup", (req, res) => {
-    console.log("SIGJNUP ROUTE", req.body.result.userName)
     db.User.create({
       userName: req.body.userName,
       password: req.body.password
       // userName: "un_0123456789",
       // password: "pw_0123456789"
     })
-    console.log(req.body.result.userName)
+    // console.log(req.body.result.userName)
       .then(() => {
         res.redirect(307, "/api/login");
       })
@@ -84,6 +83,7 @@ module.exports = function(app) {
   //   let id = 1;
   //   let timeAvailable = 5.5;
   app.put("/api/user_update", (req, res) => {
+    console.log(req.body);
     let id = req.body.id;
     let timeAvailable = req.body.timeAvailable;
     db.User.update({
@@ -129,6 +129,7 @@ module.exports = function(app) {
 
   //route to get user tv shows by id
   app.get("/api/user_tv_shows/:id",async (req,res) => {
+    console.log("***getting list of tv shows***");
     const userId = parseInt(req.params.id);
     try {
       if (!isNaN(userId)) {
@@ -158,30 +159,16 @@ module.exports = function(app) {
 
   // route for adding tv show to a user
   app.post("/api/add_tv_show", (req, res) => {
-    console.log(req.body.result.id)
-    console.log(req.body.result.name);
-    console.log(req.body.result.description);
-    console.log(req.body.result.image);
-    console.log(req.body.result.runtime);
-    console.log(req.body.result.numOfEpisodes);
-    console.log(req.body.result.rating);
-    console.log(req.body.result.genre);
-    console.log(req.body.result.timeBudgeted);
-    console.log(req.body.result.timeLogged);
-    console.log(req.body.result.tvShowID);
-    console.log(req.body.result.createdAt);
-    console.log(req.body.result.updatedAt)
-    console.log(req.body.result.UserId);
     db.Tv_show.create({
-      name: req.body.result.name,
-      description: req.body.result.description,
-      image: req.body.result.image,
-      runtime: req.body.result.runtime,
-      numOfEpisodes: req.body.result.numOfEpisodes,
-      rating: req.body.result.rating,
-      genre: req.body.result.genre,
-      tvShowID: req.body.result.tvShowID,
-      UserId: req.body.result.UserId
+      name: req.body.name,
+      description: req.body.description,
+      image: req.body.image,
+      runtime: req.body.runtime,
+      numOfEpisodes: req.body.numOfEpisodes,
+      rating: req.body.rating,
+      genre: req.body.genre,
+      tvShowID: req.body.tvShowID,
+      UserId: req.body.UserId
   // app.get("/api/add_tv_show", (req, res) => {
       // name: "Cheers",
       // description: "Everybody knows your name!",
@@ -194,7 +181,7 @@ module.exports = function(app) {
       // UserId: 6
     })
       .then(() => {
-        console.log("I made it here")
+        // console.log("I made it here")
         res.end();
       })
       .catch(err => {
@@ -250,14 +237,27 @@ module.exports = function(app) {
     });
   });
 
+
+  /*
+    app.get("/api/user_tv_shows/:id",async (req,res) => {
+    console.log("***getting list of tv shows***");
+    const userId = parseInt(req.params.id);
+  */
   //route to get a specific tv show's detail for a user
-  app.get("/api/user_tv_show",async (req,res) => {
-    const id = req.body.id;
-    const UserId = req.body.UserId;
+  app.get("/api/user_tv_show/:id",async (req,res) => {
+    console.log("***geting show details***");
+    // console.log("req.body: ");
+    // console.log(req);
+    // console.log(res.data);
+    const id = parseInt(req.params.id);
+    // const UserId = parseInt(req.body.UserId);
+    console.log("id: "+ id);
+    // console.log("UserId: "+ UserId);
     // const id = 1;
     // const UserId = 1;
     try {
-      if (!isNaN(id) && !isNaN(UserId)) {
+      // if (!isNaN(id) && !isNaN(UserId)) {
+      if (!isNaN(id)) {
         const [results, metadata] = await db.sequelize.query(`
         select 
           *,
@@ -266,12 +266,12 @@ module.exports = function(app) {
             else 0
           end timeLeft,
           case
-            when (((runtime*numOfEpisodes)/60) - timeLogged) > 0 then date_format(date_add(curdate(), INTERVAL ceiling((((runtime*numOfEpisodes)/60) - timeLogged)/timeBudgeted) WEEK),'%d/%m/%Y')
+            when (((runtime*numOfEpisodes)/60) - timeLogged) > 0 then date_format(date_add(curdate(), INTERVAL ceiling((((runtime*numOfEpisodes)/60) - timeLogged)/timeBudgeted) WEEK),'%m/%d/%Y')
             else "ALREADY COMPLETED"
           end estimatedCompletionDate
         from Tv_shows t
-        where t.UserId = ${UserId}
-          and t.id = ${id}`);
+        where t.id = ${id}`
+          );
         res.json(results);
       } else {
         res.json([])
