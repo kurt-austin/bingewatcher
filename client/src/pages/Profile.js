@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import API from "../components/utils/API";
 import { InputGroup, FormControl, Button, ButtonToolbar, ListGroupItem } from 'react-bootstrap';
+import profileStyles from "./profileStyles.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { PieChart } from 'react-minimal-pie-chart';
 
 var uid = -1;
 
@@ -118,107 +121,143 @@ function Profile() {
         history.push({ pathname: "/Details", id, UserId })
     }
 
+    //React Pie Chart constants
+
+    // const defaultLabelStyle = {
+    //     fontSize: '3px',
+    //     fontFamily: 'sans-serif',
+    //     color: '#fffff', 
+    // };
+
+    // const data = [
+    //     { title: 'Time Budgeted', value: show.timeLeft, color: '#CA1F7B' },
+    //     { title: 'Time Logged', value: show.timeLogged, color: '#FF7F00' },
+    // ];
 
 
 
     return (
-        <div className="container container-fluid">
-            <h1 className="text-center"> Welcome {user}! <span className="name"></span>How much time do you have?</h1>
-            <InputGroup className="mb-3">
-                <FormControl
-                    name="timeAvailable"
-                    onChange={handleInputChange}
-                    type="number"
-                    className="form-control"
-                    placeholder="Enter how much time you have available in a week (hours)"
-                    // By entering a value, we are creating a controlled input (whatever value we set in state)
-                    value={formObject.timeAvailable}
-                />
-            </InputGroup>
+        <body className="background-color">
+            <div className="container container-fluid">
+                <h1 className="profile-heading text-center"> Welcome {user}! <span className="name"></span>How much time do you have?</h1>
+                <InputGroup className="mb-3">
+                    <FormControl
+                        name="timeAvailable"
+                        size="md"
+                        onChange={handleInputChange}
+                        type="number"
+                        className="form-control"
+                        placeholder="Enter how much time you have available in a week (hours)"
+                        // By entering a value, we are creating a controlled input (whatever value we set in state)
+                        value={formObject.timeAvailable}
+                    />
+                </InputGroup>
 
 
-            {/* Completed Shows */}
-            <div className="container">
-                <div className="row">
-                    <div className="col-xs-6 col-md-6">
-                        <div className="card">
-                            <div className="card-body">
-                                <h5 className="card-title">Completed Shows</h5>
-                                <ButtonToolbar>
-                                    <ListGroupItem className="card-text">
-                                        {shows.length > 0 ? (
-                                            shows.filter(show => show.showStatus === "COMPLETED").map(show => (
-                                                <ul key={show.id}>
-                                                    <a href="#" onClick={() => detailsPage(show.id, show.UserId)}>
-                                                            <strong> Name: {show.name} Runtime: {show.runtime} </strong>
-                                                        </a>
-                                                    <Button className="primary" onClick={() => deleteShow(show.id, show.UserId)}>Delete Show</Button>
-                                                </ul>)
-                                            )
-                                        ) : (<p>No results to display</p>)}
-                                    </ListGroupItem>
-                                </ButtonToolbar>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Shows in Progress  */}
-                    <div className="col-xs-6 col-md-6">
-                        <div className="card">
-                            <div className="card-body">
-                                <h5 className="card-title">Shows in Progress </h5>
-                                <ButtonToolbar>
-                                    <ListGroupItem className="card-text">
-                                        {shows.length > 0 ? (
-                                            shows.filter(show => show.showStatus === "INPROGRESS").map(show => (
-                                                <ul key={show.id}>
-                                                    <div>
+                {/* Completed Shows */}
+                <div className="container">
+                    <div className="row">
+                        <div className="col-xs-6 col-md-6">
+                            <div className="card">
+                                <div className="card-body">
+                                    <h5 className="profile-text card-title">Completed Shows</h5>
+                                    <ButtonToolbar>
+                                        <ListGroupItem className="card-text">
+                                            {shows.length > 0 ? (
+                                                shows.filter(show => show.showStatus === "COMPLETED").map(show => (
+                                                    <ul key={show.id}>
                                                         <a href="#" onClick={() => detailsPage(show.id, show.UserId)}>
                                                             <strong> Name: {show.name} Runtime: {show.runtime} </strong>
                                                         </a>
                                                         <Button className="primary" onClick={() => deleteShow(show.id, show.UserId)}>Delete Show</Button>
-                                                    </div>
-                                                </ul>)
-                                            )
-                                        ) : (<p>No results to display</p>)}
+                                                    </ul>)
+                                                )
+                                            ) : (<p className="no-results-style">No results to display</p>)}
+                                        </ListGroupItem>
+                                    </ButtonToolbar>
 
-                                    </ListGroupItem>
-                                </ButtonToolbar>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Shows in Progress  */}
+                        <div className="col-xs-6 col-md-6">
+                            <div className="card">
+                                <div className="card-body">
+                                    <h5 className="profile-text card-title">Shows in Progress </h5>
+                                    <ButtonToolbar>
+                                        <ListGroupItem className="card-text">
+                                            {shows.length > 0 ? (
+                                                shows.filter(show => show.showStatus === "INPROGRESS").map(show => (
+                                                    <ul key={show.id}>
+                                                        <div>
+                                                            <a href="#" onClick={() => detailsPage(show.id, show.UserId)}>
+                                                                <strong> Name: {show.name} Runtime: {show.runtime} </strong>
+                                                            </a>
+                                                            <Button className="primary" onClick={() => deleteShow(show.id, show.UserId)}>Delete Show</Button>
+                                                        </div>
+                                                    </ul>)
+                                                )
+                                            ) : (<p className="no-results-style">No results to display</p>)}
+
+                                        </ListGroupItem>
+                                    </ButtonToolbar>
 
 
+                                </div>
                             </div>
                         </div>
                     </div>
+                </div >
+                <br>
+                </br>
+                <div className="btn-group d-flex justify-content-center">
+                    <Button 
+                        type="submit" 
+                        size="md" 
+                        color="#fffff"
+                        variant="warning"
+                        className="button-style"
+                        accessibilityLabel="button for searching shows"
+                        onClick={() => search(userId)}>
+                        Search Shows
+                </Button>
+                &nbsp;
+                <Button type="submit" 
+                        size="md" 
+                        variant="warning"
+                        accessibilityLabel="button for saving profile selection"
+                        onClick={handleFormSubmit}
+                        disabled={!(formObject.timeAvailable)}>
+                        Save Profile
+                </Button>
+                &nbsp;
+                <Button type="submit" 
+                        size="md" 
+                        variant="warning"
+                        accessibilityLabel="button for logging out the user"
+                        onClick={() => logout(userId)}>
+                        Logout
+                </Button>
+                &nbsp;
+                <Button type="submit" 
+                        size="md" 
+                        variant="warning"
+                        accessibilityLabel="button for deleting user profile"
+                        onClick={() => deleteUser(userId)}
+                    > Delete Profile
+                </Button>
+
+                {/* <PieChart
+                                data={data}
+                                label={({ dataEntry }) => Math.round(dataEntry.percentage) + '%' + dataEntry.title} 
+                                labelStyle={defaultLabelStyle}
+                            /> */}
+
+
                 </div>
             </div >
-            <br>
-            </br>
-            <div className="btn-group d-flex justify-content-center">
-                <Button type="submit" className="btn-sm btn-primary"
-                    onClick={() => search(userId)}>
-                    Search Shows
-                </Button>
-                &nbsp;
-                <Button type="submit" className="btn-sm btn-primary"
-                    onClick={handleFormSubmit}
-                    disabled={!(formObject.timeAvailable)}>
-                    Save Profile
-                </Button>
-                &nbsp;
-                <Button type="submit" className="btn-sm btn-primary"
-                    onClick={() => logout(userId)}>
-                    Logout
-                </Button>
-                &nbsp;
-                <Button type="submit" className="btn-sm btn-primary"
-                    onClick={() => deleteUser(userId)}
-                > Delete Profile
-                </Button>
-
-
-            </div>
-        </div >
+        </body>
     );
 }
 
