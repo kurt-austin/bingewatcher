@@ -83,9 +83,9 @@ function Signup() {
                    </div>
                    <br>
                    </br>
-                  <div className = "footer">
+ 
                   <button type="button" className ="btn" onClick={() => login()}>Log In</button>
-                  </div>
+ 
                
                    <br></br>
                    <div className ="header">Register</div>
@@ -98,9 +98,9 @@ function Signup() {
                    </div>
                    <br>
                    </br>
-                   <div className = "footer">
+   
                    <button type ="button" className ="btn"onClick={() => signUp()}>Register</button>
-                   </div>
+   
                </div>
                </card>
                </div>
