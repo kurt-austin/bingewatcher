@@ -1,6 +1,10 @@
 import Axios from 'axios';
 import React, { useRef } from 'react';
 import {useHistory} from "react-router-dom";
+import { Button } from 'react-bootstrap';
+// import Footer from './components/footer';
+
+
 
 
 function Signup() {
@@ -94,10 +98,16 @@ function Signup() {
                    <br>
                    </br>
 
+                   {/* <div className = "footer"> */}
+                   <Button type ="button" className ="btn"onClick={() => signUp()}>Register</Button>
+                   &nbsp;
+                   <Button type="button" className ="btn" onClick={() => login()}>Log In</Button>
+                   {/* </div> */}
+
+
    
 
-                   <button type ="button" className ="btn"onClick={() => signUp()}>Register</button>
-                   <button type="button" className ="btn" onClick={() => login()}>Log In</button>
+                 
 
                </div>
                </card>
