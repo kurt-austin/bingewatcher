@@ -19,7 +19,7 @@ function Signup() {
         }
     }
     const login = () => {
-        console.log("we did it3")
+        console.log("we did it3");
         console.log("un: "+userRef.current.value);
         console.log("pw: "+passRef.current.value);
         if (userRef.current.value && passRef.current.value) {

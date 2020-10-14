@@ -1,12 +1,9 @@
 import React from "react";
+import "./jumbotron.css";
 
 function Jumbotron() {
     return (
-        <div className="jumbotron jumbotron-fluid">
-            <div className="container container-fluid">
-                <h1 className="text-center"> BingeWatchers</h1>
-            </div>
-        </div>
+        <div className="jumbotron"></div>
     );
 }
 
