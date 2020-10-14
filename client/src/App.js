@@ -1,5 +1,6 @@
 import React from 'react';
-import Jumbotron from './components/Jumbotron';
+// import Jumbotron from './components/Jumbotron';
+// import "./components/Jumbotron/style.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 //import Home from "./pages/Home";
 import Search from "./pages/Search";
@@ -19,7 +20,7 @@ function App() {
   return (
     <Router>
       {/* <Navbar /> */}
-      <Jumbotron />
+      {/* <Jumbotron /> */}
       {/* <Route exact path="/" component={Home} /> */}
       <Route exact path="/Search" component={Search} />
       <Route exact path="/" component={Signup} />
