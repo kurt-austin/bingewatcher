@@ -116,25 +116,15 @@ function Signup() {
                    <br>
                    </br>
                   <div className = "footer">
-                  <button type="button" className ="btn" onClick={() => login()}>Log In</button>
+                  <button className ="btn" onClick={() => login()}>Log In</button>
+                  <br></br>
+                  <button type ="button" className ="btn"onClick={() => signUp()}>Register</button>
                   </div>
                
-                   <br></br>
-                   <div className ="header">Register</div>
-                   <div className = "form">
-                       <div className = "form-group">
-                       <input placeholder="username" ref={userRef}></input>
-                       </div>
-                       <div className = "form-group"></div>
-                       <input placeholder="password" ref={passRef}></input>
-                   </div>
-                   <br>
-                   </br>
-                   <div className = "footer">
-                   <button type ="button" className ="btn"onClick={() => signUp()}>Register</button>
+                  
                    {/* <button onClick={() => doIt()}>Login</button> */}
                    </div>
-               </div>
+        
                </card>
                </div>
                </div>
