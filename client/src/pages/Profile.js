@@ -20,16 +20,16 @@ function Profile() {
     // Load all shows and store them with setShows
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
-        for(var pair of urlParams.entries()) {
-          // console.log(pair[0]+ ', '+ pair[1]);
-          if (pair[0] === "uid") {
-            uid = pair[1];
-          }
-       }
-        setUserId(location.userId||uid);
-        getShows(location.userId||uid);
-        getUserProfile(location.userId||uid);
-        
+        for (var pair of urlParams.entries()) {
+            // console.log(pair[0]+ ', '+ pair[1]);
+            if (pair[0] === "uid") {
+                uid = pair[1];
+            }
+        }
+        setUserId(location.userId || uid);
+        getShows(location.userId || uid);
+        getUserProfile(location.userId || uid);
+
     }, [])
 
     // Loads user profile info
@@ -56,8 +56,8 @@ function Profile() {
             .catch(err => console.log(err));
     };
 
-    function deleteShow(tvShowId,userShowId) {
-        API.deleteShow(tvShowId,userShowId)
+    function deleteShow(tvShowId, userShowId) {
+        API.deleteShow(tvShowId, userShowId)
             .then(res => getShows(userShowId))
             .catch(err => console.log(err));
     }
@@ -101,8 +101,8 @@ function Profile() {
             }
             API.saveUserSelection(user_data)
                 .then(results => {
- 
- 
+
+
                     history.push({ pathname: "/Profile", userId: userId })
                 })
                 .catch(err => console.log(err));
@@ -111,11 +111,11 @@ function Profile() {
     };
 
     function search(userId) {
-        window.location.href = "/Search?uid="+userId;
+        window.location.href = "/Search?uid=" + userId;
     };
 
     function detailsPage(id, UserId) {
-                history.push({ pathname: "/Details", id, UserId })
+        history.push({ pathname: "/Details", id, UserId })
     }
 
 
@@ -136,7 +136,7 @@ function Profile() {
                 />
             </InputGroup>
 
- 
+
             {/* Completed Shows */}
             <div className="container">
                 <div className="row">
@@ -149,9 +149,10 @@ function Profile() {
                                         {shows.length > 0 ? (
                                             shows.filter(show => show.showStatus === "COMPLETED").map(show => (
                                                 <ul key={show.id}>
-                                                    {/* <Link to={detailsPage}> */}
-                                                    <strong> Name: {show.name} Length: {show.runtime} </strong>
-                                                    {/* </Link> */}
+                                                    <a href="#" onClick={() => detailsPage(show.id, show.UserId)}>
+                                                            <strong> Name: {show.name} Runtime: {show.runtime} </strong>
+                                                        </a>
+                                                    <Button className="primary" onClick={() => deleteShow(show.id, show.UserId)}>Delete Show</Button>
                                                 </ul>)
                                             )
                                         ) : (<p>No results to display</p>)}
@@ -176,7 +177,7 @@ function Profile() {
                                                         <a href="#" onClick={() => detailsPage(show.id, show.UserId)}>
                                                             <strong> Name: {show.name} Runtime: {show.runtime} </strong>
                                                         </a>
-                                                        <Button className="primary" onClick={() => deleteShow(show.id,show.UserId)}>Delete Show</Button>
+                                                        <Button className="primary" onClick={() => deleteShow(show.id, show.UserId)}>Delete Show</Button>
                                                     </div>
                                                 </ul>)
                                             )
@@ -185,7 +186,7 @@ function Profile() {
                                     </ListGroupItem>
                                 </ButtonToolbar>
 
- 
+
                             </div>
                         </div>
                     </div>

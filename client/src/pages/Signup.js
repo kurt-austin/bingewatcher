@@ -2,7 +2,9 @@ import Axios from 'axios';
 import React, { useRef } from 'react';
 // import {Route, Redirect, useHistory} from "react-router-dom";
 import {useHistory} from "react-router-dom";
+import { Button } from 'react-bootstrap';
 // import Jumbotron from '../components/Jumbotron';
+// import Footer from './components/footer';
 
 function Signup() {
     console.log("***Signup.js***");
@@ -131,8 +133,9 @@ function Signup() {
                    <br>
                    </br>
                    {/* <div className = "footer"> */}
-                   <button type ="button" className ="btn"onClick={() => signUp()}>Register</button>
-                   <button type="button" className ="btn" onClick={() => login()}>Log In</button>
+                   <Button type ="button" className ="btn"onClick={() => signUp()}>Register</Button>
+                   &nbsp;
+                   <Button type="button" className ="btn" onClick={() => login()}>Log In</Button>
                    {/* </div> */}
                </div>
                </card>
