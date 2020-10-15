@@ -29,6 +29,7 @@
     "express-session": "^1.17.1",
     "express-sessions": "^1.0.6",
     "if-env": "^1.0.4",
+    "mysql": "^2.18.1",
     "mysql2": "^2.2.5",
     "nodemon": "^2.0.4",
     "passport": "^0.4.1",
