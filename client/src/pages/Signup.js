@@ -1,10 +1,11 @@
 import Axios from 'axios';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import {useHistory} from "react-router-dom";
+import Alert from "../components/alert";
 
 
 function Signup() {
-
+    const [userAlert , setAlert]= useState(false)
     const userRef = useRef()
     const passRef = useRef()
     let history = useHistory();
@@ -49,16 +50,25 @@ function Signup() {
                 // window.location.replace("/Profile?uid="+res.data.id);
                 // If there's an error, log the error
             })
-            .catch(err => {
-                console.log(err);
-            });
-    }
+            
+            .catch(handleLoginError);
+            function handleLoginError(err){
+                console.log(err.responseJSON);
+                setAlert(true)
+            }
 
+            
+            };
+    
+            function closeIt(){
+                setAlert(false)
+            }
     return (
 
         <div>
         <div className="app">
             <div>
+           
             <card>
                <div className = "base-container">
                    <div className = "header">Login</div>
@@ -93,7 +103,9 @@ function Signup() {
                    </div>
                    <br>
                    </br>
-
+                   { userAlert && (
+                <Alert props={{message: "Alert", myfunc: closeIt}}/>
+            )}
    
 
                    <button type ="button" className ="btn"onClick={() => signUp()}>Register</button>
@@ -108,9 +120,9 @@ function Signup() {
        
    
        );
-   }
+   
 
-
+            }
 
 
 

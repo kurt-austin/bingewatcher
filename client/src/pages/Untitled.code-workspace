@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "../../.."
+		},
+		{
+			"path": "../../../../../Project_edits/travel-n-style"
 		}
 	],
 	"settings": {}
