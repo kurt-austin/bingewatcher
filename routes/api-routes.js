@@ -9,7 +9,6 @@ module.exports = function(app) {
   // If the user has valid login credentials, send them to the members page.
   // Otherwise the user will be sent an error
   app.post("/api/login", passport.authenticate("local"), (req, res) => {
-    // console.log("where am i",req.body)
     // Sending back a password, even a hashed password, isn't a good idea
     res.json(req.user);
   });
@@ -17,8 +16,7 @@ module.exports = function(app) {
    //api routes listen on port 8080 test call
   app.get("/api/login", (req, res) => {
   //   // Sending back a password, even a hashed password, isn't a good idea
-   console.log("made it to /api/login route");
-    res.json({});
+      res.json({});
  });
 
   // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
@@ -29,8 +27,7 @@ module.exports = function(app) {
     db.User.create({
       userName: req.body.userName,
       password: req.body.password
-      // userName: "un_0123456789",
-      // password: "pw_0123456789"
+  
     })
     // console.log(req.body.result.userName)
       .then(() => {
@@ -79,9 +76,7 @@ module.exports = function(app) {
   });
 
   // Route for updating user
-  // app.get("/api/user_update", (req, res) => {
-  //   let id = 1;
-  //   let timeAvailable = 5.5;
+ 
   app.put("/api/user_update", (req, res) => {
     console.log(req.body);
     let id = req.body.id;
@@ -129,7 +124,7 @@ module.exports = function(app) {
 
   //route to get user tv shows by id
   app.get("/api/user_tv_shows/:id",async (req,res) => {
-    console.log("***getting list of tv shows***");
+
     const userId = parseInt(req.params.id);
     try {
       if (!isNaN(userId)) {
@@ -169,16 +164,7 @@ module.exports = function(app) {
       genre: req.body.genre,
       tvShowID: req.body.tvShowID,
       UserId: req.body.UserId
-  // app.get("/api/add_tv_show", (req, res) => {
-      // name: "Cheers",
-      // description: "Everybody knows your name!",
-      // image: "https://static.episodate.com/images/tv-show/full/4228.jpg",
-      // runtime: 30,
-      // numOfEpisodes: 100,
-      // rating: 8.2,
-      // genre: "Family",
-      // tvShowID: 4228,
-      // UserId: 6
+  
     })
       .then(() => {
         // console.log("I made it here")
@@ -191,10 +177,7 @@ module.exports = function(app) {
   });
 
   // Route for deleting tv show from user
-  // app.get("/api/remove_tv_show", (req, res) => {
-    // const id = 6;
-    // const UserId = 6;
-  app.delete("/api/remove_tv_show", (req, res) => {
+    app.delete("/api/remove_tv_show", (req, res) => {
     const id = req.body.id;
     const UserId = req.body.UserId;
     db.Tv_show.destroy({
@@ -211,11 +194,7 @@ module.exports = function(app) {
   });
 
   // Route for updating tv_show
-  // app.get("/api/update_tv_show", (req, res) => {
-  //   const id = 1;
-  //   const UserId = 1;
-  //   const timeBudgeted = 1.5;
-  //   const timeLogged = 27.5; // 27.5
+ 
   app.put("/api/update_tv_show", (req, res) => {
     const id = req.body.id;
     const UserId = req.body.UserId;
@@ -238,25 +217,14 @@ module.exports = function(app) {
   });
 
 
-  /*
-    app.get("/api/user_tv_shows/:id",async (req,res) => {
-    console.log("***getting list of tv shows***");
-    const userId = parseInt(req.params.id);
-  */
+ 
   //route to get a specific tv show's detail for a user
   app.get("/api/user_tv_show/:id",async (req,res) => {
-    console.log("***geting show details***");
-    // console.log("req.body: ");
-    // console.log(req);
-    // console.log(res.data);
-    const id = parseInt(req.params.id);
-    // const UserId = parseInt(req.body.UserId);
-    console.log("id: "+ id);
-    // console.log("UserId: "+ UserId);
-    // const id = 1;
-    // const UserId = 1;
+  
+        const id = parseInt(req.params.id);
+    
     try {
-      // if (!isNaN(id) && !isNaN(UserId)) {
+   
       if (!isNaN(id)) {
         const [results, metadata] = await db.sequelize.query(`
         select 
