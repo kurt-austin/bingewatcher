@@ -137,7 +137,7 @@ function Profile() {
 
 
     return (
-        <body className="background-color">
+        <div className="yellow-background">
             <div className="container container-fluid">
                 <h1 className="profile-heading text-center"> Welcome {user}! <span className="name"></span>How much time do you have?</h1>
                 <InputGroup className="mb-3">
@@ -215,9 +215,7 @@ function Profile() {
                     <Button 
                         type="submit" 
                         size="md" 
-                        color="#fffff"
-                        variant="warning"
-                        className="button-style"
+                        className="button-pink"
                         accessibilityLabel="button for searching shows"
                         onClick={() => search(userId)}>
                         Search Shows
@@ -225,7 +223,7 @@ function Profile() {
                 &nbsp;
                 <Button type="submit" 
                         size="md" 
-                        variant="warning"
+                        className="button-pink"
                         accessibilityLabel="button for saving profile selection"
                         onClick={handleFormSubmit}
                         disabled={!(formObject.timeAvailable)}>
@@ -234,7 +232,7 @@ function Profile() {
                 &nbsp;
                 <Button type="submit" 
                         size="md" 
-                        variant="warning"
+                        className="button-pink"
                         accessibilityLabel="button for logging out the user"
                         onClick={() => logout(userId)}>
                         Logout
@@ -242,7 +240,7 @@ function Profile() {
                 &nbsp;
                 <Button type="submit" 
                         size="md" 
-                        variant="warning"
+                        className="button-pink"
                         accessibilityLabel="button for deleting user profile"
                         onClick={() => deleteUser(userId)}
                     > Delete Profile
@@ -257,7 +255,7 @@ function Profile() {
 
                 </div>
             </div >
-        </body>
+        </div>
     );
 }
 

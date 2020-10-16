@@ -5,13 +5,11 @@
     color: #D0417E;
 }
 
-.background-color {
+.yellow-background {
     background-color: #FFFACD;
+    padding-top: 60px;
 }
 
-.profile-background {
-    background-color: papayawhip;
-}
 
 .profile-text {
     color: #D0417E;
@@ -25,4 +23,10 @@
 
 .btn-group {
     font-family: 'Righteous', cursive; 
+}
+
+.button-pink {
+    background-color: #D0417E !important;
+    color: white;
+    border-color:  #D0417E   !important;
 }
