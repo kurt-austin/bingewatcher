@@ -2,7 +2,7 @@ import Axios from 'axios';
 import React, { useRef, useState } from 'react';
 import {useHistory} from "react-router-dom";
 import Alert from "../components/alert";
-
+import { Button } from 'react-bootstrap';
 
 function Signup() {
  
@@ -67,12 +67,12 @@ function Signup() {
     return (
 
         <div>
-        <div className="app">
-            <div>
+        <div className="app container">
+            <div className="d-flex justify-content-center">
            
             <card>
                <div className = "base-container">
-                   <div className = "header">Login</div>
+                   {/* <div className = "header">Login</div> */}
                    <div className = "content">
                        <div className = "image">
                            <img src ="https://i.ndtvimg.com/i/2016-07/television-generic_650x400_81469541532.jpg" height= "200px" width ="300px" >
@@ -82,23 +82,42 @@ function Signup() {
                    </div>
                    </card>
                    </div>
+                   <p className="text-center">
+                    TV Show data is generated with the <a href="https://www.episodate.com/api" target="_blank">EpisoDate.com API </a>
+                    <a rel="license" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+                </p>
 
-                   <br>
-                   </br>
-               
-                   <br></br>
-                   <div className ="header">Register</div>
-                   <div className = "form">
-                       <div className = "form-group">
-                       <input placeholder="username" ref={userRef}></input>
-                       </div>
-                       <div className = "form-group"></div>
-                       <input placeholder="password" ref={passRef}></input>
-                   </div>
-                   <br>
-                   </br>
-                   <button type ="button" className ="btn"onClick={() => signUp()}>Register</button>
-                   <button type="button" className ="btn" onClick={() => login()}>Log In</button>
+                <div className="card-body d-flex justify-content-center">
+                    <card>
+                        <div className="card-body">
+                            <div className="header d-flex justify-content-center">Register/Login</div>
+                            <p>Username and password should be 8-30 characters.</p>
+                            <div className="d-flex justify-content-center">
+                                <div className="form">
+                                    <div className="form-group">
+                                        <input placeholder="username" ref={userRef}></input>
+                                    </div>
+                                    <div className="form-group"></div>
+                                    <input type="password" placeholder="password" ref={passRef}></input>
+                                </div>
+                            </div>
+
+                            <br>
+                            </br>
+                            <div className="d-flex justify-content-center">
+                                <Button type="button" className="btn" onClick={() => signUp()}>Register</Button>
+                                &nbsp;
+                                <Button type="button" className="btn" onClick={() => login()}>Log In</Button>
+                            </div>
+                        </div>
+                    </card>
+																												
+			  
+   
+
+				  
+
+                </div>
 
                    <div className="message">
                    { userAlert && (

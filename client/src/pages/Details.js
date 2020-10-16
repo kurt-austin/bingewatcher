@@ -38,7 +38,7 @@ function Details(props) {
 
     function handleFormSubmit(event) {
         event.preventDefault()
-        if (formObject.timeLogged && formObject.timeBudgeted) {
+        // if (formObject.timeLogged && formObject.timeBudgeted) {
 
             API.updateUserSelection(show.id, show.UserId, formObject.timeBudgeted, formObject.timeLogged)
                 .then(results => {
@@ -51,7 +51,7 @@ function Details(props) {
                         .catch(err => console.log(err));
                 })
 
-        };
+        // };
     };
 
     function backToProfile() {
@@ -68,7 +68,7 @@ function Details(props) {
     };
 
     const data = [
-        { title: 'Time Budgeted', value: show.timeLeft, color: '#CA1F7B' },
+        { title: 'Time Left', value: show.timeLeft, color: '#CA1F7B' },
         { title: 'Time Logged', value: show.timeLogged, color: '#FF7F00' },
     ];
 
@@ -90,7 +90,7 @@ function Details(props) {
                             <ListGroupItem> Rating: {show.rating}</ListGroupItem>
                             <ListGroupItem> Runtime: {show.runtime}</ListGroupItem>
                             <ListGroupItem> Estimated Completion Date: {show.estimatedCompletionDate}</ListGroupItem>
-                            <ListGroupItem> Update time logged: {show.timeLogged}
+                            <ListGroupItem> Update hours logged: {show.timeLogged}
                                 <InputGroup className="mb-3">
                                     <FormControl
                                         name="timeLogged"
@@ -103,7 +103,7 @@ function Details(props) {
                                     />
                                 </InputGroup>
                             </ListGroupItem>
-                            <ListGroupItem> Update time budgeted: {show.timeBudgeted}
+                            <ListGroupItem> Update hours budgeted per week: {show.timeBudgeted}
                                 <InputGroup className="mb-3">
                                     <FormControl
                                         name="timeBudgeted"

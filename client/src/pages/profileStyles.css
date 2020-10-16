@@ -30,3 +30,15 @@
     color: white;
     border-color:  #D0417E   !important;
 }
+
+.OVERBUDGETED {
+    color: red;
+}
+
+.UNDERBUDGETED {
+    color: blue;
+}
+
+.FULLYBUDGETED {
+    color: green;
+}
