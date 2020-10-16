@@ -2,20 +2,16 @@ import Axios from 'axios';
 import React, { useRef, useState } from 'react';
 import {useHistory} from "react-router-dom";
 import Alert from "../components/alert";
-import { Button } from 'react-bootstrap';
-// import Footer from './components/footer';
-
-
 
 
 function Signup() {
+ 
     const [userAlert , setAlert]= useState(false)
     const userRef = useRef()
     const passRef = useRef()
     let history = useHistory();
 
     const signUp = () => {
-
         if (userRef.current.value && passRef.current.value) {
             signUpUser(userRef.current.value.trim(), passRef.current.value.trim());
         }
@@ -35,12 +31,15 @@ function Signup() {
                 history.push({ pathname: "/Profile", userId: res.data.id })
 
             })
-            .catch(err => {
-                console.log(err);
-            });
+            .catch(handleLoginError);
+            function handleLoginError(err){
+                console.log(err.responseJSON);
+                setAlert(true)
+            };
     }
 
     function loginUser(userName, password) {
+       
         Axios.post("/api/login",
         {
             userName,
@@ -101,7 +100,6 @@ function Signup() {
                    <button type ="button" className ="btn"onClick={() => signUp()}>Register</button>
                    <button type="button" className ="btn" onClick={() => login()}>Log In</button>
 
-
                    <div className="message">
                    { userAlert && (
                 <Alert message = "please enter password and username at least 8 characters" closeIt ={closeIt}/>
@@ -109,16 +107,6 @@ function Signup() {
    
 
                   
-                
-                   <Button type ="button" className ="btn"onClick={() => signUp()}>Register</Button>
-                   &nbsp;
-                   <Button type="button" className ="btn" onClick={() => login()}>Log In</Button>
-                 
-
-   
-
-                 
-
 
                </div>
                </div>
