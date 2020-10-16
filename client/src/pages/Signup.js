@@ -2,6 +2,10 @@ import Axios from 'axios';
 import React, { useRef, useState } from 'react';
 import {useHistory} from "react-router-dom";
 import Alert from "../components/alert";
+import { Button } from 'react-bootstrap';
+// import Footer from './components/footer';
+
+
 
 
 function Signup() {
@@ -97,6 +101,7 @@ function Signup() {
                    <button type ="button" className ="btn"onClick={() => signUp()}>Register</button>
                    <button type="button" className ="btn" onClick={() => login()}>Log In</button>
 
+
                    <div className="message">
                    { userAlert && (
                 <Alert message = "please enter password and username at least 8 characters" closeIt ={closeIt}/>
@@ -104,6 +109,16 @@ function Signup() {
    
 
                   
+                
+                   <Button type ="button" className ="btn"onClick={() => signUp()}>Register</Button>
+                   &nbsp;
+                   <Button type="button" className ="btn" onClick={() => login()}>Log In</Button>
+                 
+
+   
+
+                 
+
 
                </div>
                </div>

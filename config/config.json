@@ -1,23 +1,23 @@
 {
   "development": {
-    "username": "root",
-    "password": "Code1289!",
-    "database": "bingewatcher_db",
-    "host": "127.0.0.1",
+    "username": "duo9n56kcqqek615",
+    "password": "r35mmoo6wah6uh8k",
+    "database": "rgzlikbpcjx38v1e",
+    "host": "nwhazdrp7hdpd4a4.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
-    "password": "root",
-    "database": "bingewatcher_db",
-    "host": "127.0.0.1",
+    "username": "duo9n56kcqqek615",
+    "password": "r35mmoo6wah6uh8k",
+    "database": "rgzlikbpcjx38v1e",
+    "host": "nwhazdrp7hdpd4a4.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": "root",
-    "database": "bingewatcher_db",
-    "host": "127.0.0.1",
+    "username": "duo9n56kcqqek615",
+    "password": "r35mmoo6wah6uh8k",
+    "database": "rgzlikbpcjx38v1e",
+    "host": "nwhazdrp7hdpd4a4.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "dialect": "mysql"
   }
 }
