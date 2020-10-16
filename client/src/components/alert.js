@@ -1,12 +1,15 @@
 import React from "react";
 
-export default function Alert({message, myfunc}){//render prop function to close alert from calling component
-   console.log(myfunc)
+
+export default function Alert({message, closeIt}){
+   console.log(closeIt)
+
+   
    return (
-<div className= "cssed">
+<div className= "message">
     < h4 >{document.title} says</h4> 
     <p>{message}</p>
-    <button onClick={()=>myfunc()}>Coolness</button>
+    <button onClick={()=>closeIt()}>Close</button>
     </div>
     )
-}
+} 

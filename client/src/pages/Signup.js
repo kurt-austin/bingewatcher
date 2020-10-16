@@ -30,7 +30,6 @@ function Signup() {
             .then((res) => {
                 history.push({ pathname: "/Profile", userId: res.data.id })
 
-                // If there's an error, log the error
             })
             .catch(err => {
                 console.log(err);
@@ -47,8 +46,7 @@ function Signup() {
 
 
                 history.push({ pathname: "/Profile", userId: res.data.id })
-                // window.location.replace("/Profile?uid="+res.data.id);
-                // If there's an error, log the error
+               
             })
             
             .catch(handleLoginError);
@@ -81,16 +79,9 @@ function Signup() {
                    </div>
                    </card>
                    </div>
-                   <div className = "card-body">
-                   <card>
-                       <div className= "card-body">
 
                    <br>
                    </br>
-
-        
-
-
                
                    <br></br>
                    <div className ="header">Register</div>
@@ -103,26 +94,27 @@ function Signup() {
                    </div>
                    <br>
                    </br>
-                   { userAlert && (
-                <Alert props={{message: "Alert", myfunc: closeIt}}/>
-            )}
-   
-
                    <button type ="button" className ="btn"onClick={() => signUp()}>Register</button>
                    <button type="button" className ="btn" onClick={() => login()}>Log In</button>
 
-               </div>
-               </card>
-               </div>
-               </div>
-               </div>
-               
-       
-   
-       );
+                   <div className="message">
+                   { userAlert && (
+                <Alert message = "please enter password and username at least 8 characters" closeIt ={closeIt}/>
+            )}
    
 
-            }
+                  
+
+               </div>
+               </div>
+               </div>
+       
+                   )};
+
+       
+   
+
+            
 
 
 
