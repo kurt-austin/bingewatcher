@@ -114,26 +114,15 @@ function Profile() {
     };
 
     function search(userId) {
-        window.location.href = "/Search?uid=" + userId;
+      
+        history.push("/Search?uid=" + userId)
     };
 
     function detailsPage(id, UserId) {
         history.push({ pathname: "/Details", id, UserId })
     }
 
-    //React Pie Chart constants
-
-    // const defaultLabelStyle = {
-    //     fontSize: '3px',
-    //     fontFamily: 'sans-serif',
-    //     color: '#fffff', 
-    // };
-
-    // const data = [
-    //     { title: 'Time Budgeted', value: show.timeLeft, color: '#CA1F7B' },
-    //     { title: 'Time Logged', value: show.timeLogged, color: '#FF7F00' },
-    // ];
-
+    
 
 
     return (
