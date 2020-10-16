@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import API from "../components/utils/API";
-import { InputGroup, FormControl, Button, ButtonToolbar, ListGroupItem } from 'react-bootstrap';
+import { InputGroup, FormControl, Button, ButtonToolbar, ListGroupItem, ListGroup } from 'react-bootstrap';
 import profileStyles from "./profileStyles.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { PieChart } from 'react-minimal-pie-chart';
@@ -61,7 +61,13 @@ function Profile() {
 
     function deleteShow(tvShowId, userShowId) {
         API.deleteShow(tvShowId, userShowId)
-            .then(res => getShows(userShowId))
+        .then(res => 
+            {
+                getUserProfile(location.userId || uid);
+                getShows(userShowId);
+            }
+            
+        )
             .catch(err => console.log(err));
     }
 
@@ -105,7 +111,7 @@ function Profile() {
             API.saveUserSelection(user_data)
                 .then(results => {
 
-
+                    getUserProfile(location.userId || uid);
                     history.push({ pathname: "/Profile", userId: userId })
                 })
                 .catch(err => console.log(err));
@@ -128,7 +134,7 @@ function Profile() {
     return (
         <div className="yellow-background">
             <div className="container container-fluid">
-                <h1 className="profile-heading text-center"> Welcome {user}! <span className="name"></span>How much time do you have?</h1>
+            <h1 className="profile-heading text-center"> Welcome {user}! <span className="name"></span>How many hours do you have per week?</h1>
                 <InputGroup className="mb-3">
                     <FormControl
                         name="timeAvailable"
@@ -141,7 +147,10 @@ function Profile() {
                         value={formObject.timeAvailable}
                     />
                 </InputGroup>
-
+                <ListGroup className="list-group-flush">
+                            <ListGroupItem> Total Hours Budgeted: {totalBudgeted}</ListGroupItem>
+                            <ListGroupItem className={budgetStatus}> Budget Status: {budgetStatus}</ListGroupItem>
+                </ListGroup>
 
                 {/* Completed Shows */}
                 <div className="container">
@@ -152,7 +161,7 @@ function Profile() {
                                     <h5 className="profile-text card-title">Completed Shows</h5>
                                     <ButtonToolbar>
                                         <ListGroupItem className="card-text">
-                                            {shows.length > 0 ? (
+                                            {shows.filter(show => show.showStatus === "COMPLETED").length > 0 ? (
                                                 shows.filter(show => show.showStatus === "COMPLETED").map(show => (
                                                     <ul key={show.id}>
                                                         <a href="#" onClick={() => detailsPage(show.id, show.UserId)}>
@@ -176,12 +185,12 @@ function Profile() {
                                     <h5 className="profile-text card-title">Shows in Progress </h5>
                                     <ButtonToolbar>
                                         <ListGroupItem className="card-text">
-                                            {shows.length > 0 ? (
+                                            {shows.filter(show => show.showStatus === "INPROGRESS").length > 0 ? (
                                                 shows.filter(show => show.showStatus === "INPROGRESS").map(show => (
                                                     <ul key={show.id}>
                                                         <div>
                                                             <a href="#" onClick={() => detailsPage(show.id, show.UserId)}>
-                                                                <strong> Name: {show.name} Runtime: {show.runtime} </strong>
+                                                            <strong> Name: {show.name} Budgeted: {show.timeBudgeted}&nbsp;</strong>
                                                             </a>
                                                             <Button className="primary" onClick={() => deleteShow(show.id, show.UserId)}>Delete Show</Button>
                                                         </div>
