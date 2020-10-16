@@ -1,6 +1,7 @@
 import Axios from 'axios';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import {useHistory} from "react-router-dom";
+import Alert from "../components/alert";
 import { Button } from 'react-bootstrap';
 // import Footer from './components/footer';
 
@@ -8,7 +9,7 @@ import { Button } from 'react-bootstrap';
 
 
 function Signup() {
-
+    const [userAlert , setAlert]= useState(false)
     const userRef = useRef()
     const passRef = useRef()
     let history = useHistory();
@@ -33,7 +34,6 @@ function Signup() {
             .then((res) => {
                 history.push({ pathname: "/Profile", userId: res.data.id })
 
-                // If there's an error, log the error
             })
             .catch(err => {
                 console.log(err);
@@ -50,19 +50,27 @@ function Signup() {
 
 
                 history.push({ pathname: "/Profile", userId: res.data.id })
-                // window.location.replace("/Profile?uid="+res.data.id);
-                // If there's an error, log the error
+               
             })
-            .catch(err => {
-                console.log(err);
-            });
-    }
+            
+            .catch(handleLoginError);
+            function handleLoginError(err){
+                console.log(err.responseJSON);
+                setAlert(true)
+            }
 
+            
+            };
+    
+            function closeIt(){
+                setAlert(false)
+            }
     return (
 
         <div>
         <div className="app">
             <div>
+           
             <card>
                <div className = "base-container">
                    <div className = "header">Login</div>
@@ -75,16 +83,9 @@ function Signup() {
                    </div>
                    </card>
                    </div>
-                   <div className = "card-body">
-                   <card>
-                       <div className= "card-body">
 
                    <br>
                    </br>
-
-        
-
-
                
                    <br></br>
                    <div className ="header">Register</div>
@@ -97,30 +98,38 @@ function Signup() {
                    </div>
                    <br>
                    </br>
+                   <button type ="button" className ="btn"onClick={() => signUp()}>Register</button>
+                   <button type="button" className ="btn" onClick={() => login()}>Log In</button>
 
-                   {/* <div className = "footer"> */}
+
+                   <div className="message">
+                   { userAlert && (
+                <Alert message = "please enter password and username at least 8 characters" closeIt ={closeIt}/>
+            )}
+   
+
+                  
+                
                    <Button type ="button" className ="btn"onClick={() => signUp()}>Register</Button>
                    &nbsp;
                    <Button type="button" className ="btn" onClick={() => login()}>Log In</Button>
-                   {/* </div> */}
-
+                 
 
    
 
                  
 
-               </div>
-               </card>
-               </div>
+
                </div>
                </div>
-               
+               </div>
+       
+                   )};
+
        
    
-       );
-   }
 
-
+            
 
 
 
