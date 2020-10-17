@@ -1,68 +1,57 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# BINGEWATCHERS
 
-## Available Scripts
+  ## Description:
+  BINGEWATCHERS is a React app that allows you to budget your time and track your progress for watching TV shows. 
 
-In the project directory, you can run:
+  ## Links:
+  * [Repo](https://github.com/kurt-austin/bingewatcher)
+  * [Deployed Site](https://ancient-plateau-69456.herokuapp.com/)
 
-### `npm start`
+  ## Table of Contents:
+  * [Installation](#installation)
+  * [Usage](#usage)
+  * [Technology Used](#technology-used)
+  * [Questions](#questions)
+  * [Screenshots](#screenshots)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+  ## Installation:
+  * Install dependencies by running "npm install" from the terminal.
+  
+  ## Usage:
+  * Run "npm start" from the terminal to start the server.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+  ## Technology Used:
+  * Node.js - for JS runtime environment
+  * JS/ES6+ - for program logic
+  * Bootstrap & React Bootstrap - for responsive style
+  * React - for components and state handling and component routing
+  * Sequelize ORM - for DB object relational mapping
+  * MySQL - for storing user profile information and tracking TV show progress
+  * Express - for serving
+  * Passport.js/Bcrypt - for authentication and encryption
+  * bootstrap - for responsive design
+  * HTML - layout
+  * CSS - for custom style
+  * episodate.com/api - for TV show data
+  * react-minimal-pie-chart - for charting
+  * axios - for API calls
 
-### `npm test`
+  ## Questions:
+  * https://github.com/begumsacak
+  * https://github.com/Marissa-Mayes
+  * https://github.com/kurt-austin
+  * https://github.com/locutusOO1
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  ## Screenshots:
 
-### `npm run build`
+  ### Login
+  ![Screenshot of BINGEWATCHERS Login](images/login.png)
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  ### Profile
+  ![Screenshot of BINGEWATCHERS Profile](images/profile.png)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+  ### Search
+  ![Screenshot of BINGEWATCHERS Search](images/search.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+  ### Detail
+  ![Screenshot of BINGEWATCHERS Detail](images/detail.png)
