@@ -96,6 +96,8 @@ class Search extends Component {
 
     await axios.get("https://episodate.com/api/show-details?q=" + id)
     .then(res=>{
+      const description = res.data.tvShow.description.replace(/(<([^>]+)>)/gi, ""); 
+      res.data.tvShow.description = description;
       newArray.push(res.data.tvShow)     
       this.setState({result: newArray})
 
