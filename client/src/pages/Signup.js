@@ -70,18 +70,19 @@ function Signup() {
         <div className="card-body d-flex justify-content-center">
           <card>
             <div className="card-body">
-              <div className="header d-flex justify-content-center">
+              <div className="header d-flex justify-content-center register-login">
                 Register/Login
               </div>
-              <p>Username and password should be 8-30 characters.</p>
+              <p className="signup-regular-text">Username and password should be 8-30 characters.</p>
               <div className="d-flex justify-content-center">
                 <div className="form">
                   <div className="form-group">
-                    <input placeholder="username" ref={userRef}></input>
+                    <input placeholder="username" className="username-password " ref={userRef}></input>
                   </div>
                   <div className="form-group"></div>
                   <input
                     type="password"
+                    className="username-password"
                     placeholder="password"
                     ref={passRef}
                   ></input>
@@ -90,15 +91,15 @@ function Signup() {
 
               <br></br>
               <div className="d-flex justify-content-center">
-                <Button type="button" className="btn" onClick={() => signUp()}>
+                <Button type="button" className="button-pink" onClick={() => signUp()}>
                   Register
                 </Button>
-                &nbsp;
-                <Button type="button" className="btn" onClick={() => login()}>
+
+                <Button type="button" className="button-pink" onClick={() => login()}>
                   Log In
                 </Button>
               </div>
-              <p className="text-center">
+              <p className="text-center signup-regular-text">
                 TV Show data is generated with the{" "}
                 <a href="https://www.episodate.com/api" target="_blank">
                   EpisoDate.com API{" "}
