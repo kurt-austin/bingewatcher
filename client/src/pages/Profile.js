@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import API from "../components/utils/API";
-import { InputGroup, FormControl, Button, ButtonToolbar, ListGroupItem, ListGroup } from 'react-bootstrap';
+import { InputGroup, FormControl, Button, ButtonToolbar, ListGroupItem, ListGroup, Card } from 'react-bootstrap';
 import profileStyles from "./profileStyles.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { PieChart } from 'react-minimal-pie-chart';
@@ -24,7 +24,7 @@ function Profile() {
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
         for (var pair of urlParams.entries()) {
- 
+
             if (pair[0] === "uid") {
                 uid = pair[1];
             }
@@ -53,7 +53,7 @@ function Profile() {
     function getShows(UserId) {
         API.getShows(UserId)
             .then(res => {
- 
+
                 setShows(res.data)
             })
             .catch(err => console.log(err));
@@ -61,13 +61,12 @@ function Profile() {
 
     function deleteShow(tvShowId, userShowId) {
         API.deleteShow(tvShowId, userShowId)
-        .then(res => 
-            {
+            .then(res => {
                 getUserProfile(location.userId || uid);
                 getShows(userShowId);
             }
-            
-        )
+
+            )
             .catch(err => console.log(err));
     }
 
@@ -75,7 +74,7 @@ function Profile() {
     function deleteUser(UserId) {
         API.deleteUser(UserId)
             .then(results => {
-    
+
                 window.location.href = "/"
             })
             .catch(err => console.log(err));
@@ -93,7 +92,7 @@ function Profile() {
     // Handles updating component state when the user types into the input field
     function handleInputChange(event) {
         const { name, value } = event.target;
-  
+
         setFormObject({ ...formObject, [name]: value })
     };
 
@@ -120,7 +119,7 @@ function Profile() {
     };
 
     function search(userId) {
-      
+
         history.push("/Search?uid=" + userId)
     };
 
@@ -128,13 +127,22 @@ function Profile() {
         history.push({ pathname: "/Details", id, UserId })
     }
 
-    
+    // const defaultLabelStyle = {
+    //     fontSize: '3px',
+    //     fontFamily: 'Righteous',
+    //     color: '#fffff', 
+    // };
+
+    // const data = [
+    //     { title: 'Time Left', value: show.timeLeft, color: '#CA1F7B' },
+    //     { title: 'Time Logged', value: show.timeLogged, color: '#FF7F00' },
+    // ];
 
 
     return (
         <div className="yellow-background">
             <div className="container container-fluid">
-            <h1 className="profile-heading text-center"> Welcome {user}! <span className="name"></span>How many hours do you have per week?</h1>
+                <h1 className="profile-heading text-center"> Welcome {user}! <span className="name"></span>How many hours do you have per week?</h1>
                 <InputGroup className="mb-3">
                     <FormControl
                         name="timeAvailable"
@@ -148,12 +156,12 @@ function Profile() {
                     />
                 </InputGroup>
                 <ListGroup className="list-group-flush">
-                            <ListGroupItem> Total Hours Budgeted: {totalBudgeted}</ListGroupItem>
-                            <ListGroupItem className={budgetStatus}> Budget Status: {budgetStatus}</ListGroupItem>
+                    <ListGroupItem> <strong>Total Hours Budgeted </strong>: {totalBudgeted}</ListGroupItem>
+                    <ListGroupItem className={budgetStatus}> <strong>Budget Status</strong>: {budgetStatus}</ListGroupItem>
                 </ListGroup>
 
                 {/* Completed Shows */}
-                <div className="container">
+                <div className="container card-padding">
                     <div className="row">
                         <div className="col-xs-6 col-md-6">
                             <div className="card">
@@ -164,10 +172,17 @@ function Profile() {
                                             {shows.filter(show => show.showStatus === "COMPLETED").length > 0 ? (
                                                 shows.filter(show => show.showStatus === "COMPLETED").map(show => (
                                                     <ul key={show.id}>
-                                                        <a href="#" onClick={() => detailsPage(show.id, show.UserId)}>
-                                                            <strong> Name: {show.name} Runtime: {show.runtime} </strong>
-                                                        </a>
-                                                        <Button className="primary" onClick={() => deleteShow(show.id, show.UserId)}>Delete Show</Button>
+                                                        <div className="row">
+                                                            <div className="col-xs-6 col-md-6">
+                                                                <a href="#" onClick={() => detailsPage(show.id, show.UserId)}>
+                                                                    <strong> Show Name  </strong>: {show.name} <br></br> <strong> Runtime</strong>: {show.runtime}
+                                                                </a>
+                                                                <Button className="button-pink" onClick={() => deleteShow(show.id, show.UserId)}>Delete Show</Button>
+                                                            </div>
+                                                            <div className="col-xs-6 col-md-6">
+                                                                <Card.Img variant="right" className="thumbnail" src={show.image} alt="movie image for the chosen movie" />
+                                                            </div>
+                                                        </div>
                                                     </ul>)
                                                 )
                                             ) : (<p className="no-results-style">No results to display</p>)}
@@ -188,11 +203,16 @@ function Profile() {
                                             {shows.filter(show => show.showStatus === "INPROGRESS").length > 0 ? (
                                                 shows.filter(show => show.showStatus === "INPROGRESS").map(show => (
                                                     <ul key={show.id}>
-                                                        <div>
-                                                            <a href="#" onClick={() => detailsPage(show.id, show.UserId)}>
-                                                            <strong> Name: {show.name} Budgeted: {show.timeBudgeted}&nbsp;</strong>
-                                                            </a>
-                                                            <Button className="primary" onClick={() => deleteShow(show.id, show.UserId)}>Delete Show</Button>
+                                                        <div className="row">
+                                                            <div className="col-xs-6 col-md-6">
+                                                                <a href="#" onClick={() => detailsPage(show.id, show.UserId)}>
+                                                                    <strong> Name</strong>: {show.name} <strong> <br></br> Budgeted</strong>:{show.timeBudgeted}&nbsp;
+                                                                    </a>
+                                                                <Button className="button-pink" onClick={() => deleteShow(show.id, show.UserId)}>Delete Show</Button>
+                                                            </div>
+                                                            <div className="col-xs-6 col-md-6">
+                                                                <Card.Img variant="right" className="thumbnail" src={show.image} alt="movie image for the chosen movie" />
+                                                            </div>
                                                         </div>
                                                     </ul>)
                                                 )
@@ -200,60 +220,50 @@ function Profile() {
 
                                         </ListGroupItem>
                                     </ButtonToolbar>
-
-
-                                </div>
                             </div>
                         </div>
                     </div>
-                </div >
-                <br>
-                </br>
-                <div className="btn-group d-flex justify-content-center">
-                    <Button 
-                        type="submit" 
-                        size="md" 
-                        className="button-pink"
-                        accessibilityLabel="button for searching shows"
-                        onClick={() => search(userId)}>
-                        Search Shows
-                </Button>
-                &nbsp;
-                <Button type="submit" 
-                        size="md" 
-                        className="button-pink"
-                        accessibilityLabel="button for saving profile selection"
-                        onClick={handleFormSubmit}
-                        disabled={!(formObject.timeAvailable)}>
-                        Save Profile
-                </Button>
-                &nbsp;
-                <Button type="submit" 
-                        size="md" 
-                        className="button-pink"
-                        accessibilityLabel="button for logging out the user"
-                        onClick={() => logout(userId)}>
-                        Logout
-                </Button>
-                &nbsp;
-                <Button type="submit" 
-                        size="md" 
-                        className="button-pink"
-                        accessibilityLabel="button for deleting user profile"
-                        onClick={() => deleteUser(userId)}
-                    > Delete Profile
-                </Button>
-
-                {/* <PieChart
-                                data={data}
-                                label={({ dataEntry }) => Math.round(dataEntry.percentage) + '%' + dataEntry.title} 
-                                labelStyle={defaultLabelStyle}
-                            /> */}
-
-
                 </div>
             </div >
-        </div>
+            <br>
+            </br>
+            <div className="btn-group d-flex justify-content-center">
+                <Button
+                    type="submit"
+                    size="md"
+                    className="button-pink"
+                    accessibilityLabel="button for searching shows"
+                    onClick={() => search(userId)}>
+                    Search Shows
+                </Button>
+                &nbsp;
+                <Button type="submit"
+                    size="md"
+                    className="button-pink"
+                    accessibilityLabel="button for saving profile selection"
+                    onClick={handleFormSubmit}
+                    disabled={!(formObject.timeAvailable)}>
+                    Save Profile
+                </Button>
+                &nbsp;
+                <Button type="submit"
+                    size="md"
+                    className="button-pink"
+                    accessibilityLabel="button for logging out the user"
+                    onClick={() => logout(userId)}>
+                    Logout
+                </Button>
+                &nbsp;
+                <Button type="submit"
+                    size="md"
+                    className="button-pink"
+                    accessibilityLabel="button for deleting user profile"
+                    onClick={() => deleteUser(userId)}
+                > Delete Profile
+                </Button>
+            </div>
+        </div >
+            </div >
     );
 }
 

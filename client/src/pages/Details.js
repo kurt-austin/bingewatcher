@@ -5,6 +5,7 @@ import { useLocation, useHistory } from 'react-router-dom';
 import API from "../components/utils/API.js";
 import { PieChart } from 'react-minimal-pie-chart';
 import { Card, ListGroup, ListGroupItem, InputGroup, FormControl } from 'react-bootstrap';
+import detailsStyles from "./detailsStyles.css";
 
 function Details(props) {
 
@@ -63,8 +64,8 @@ function Details(props) {
 
     const defaultLabelStyle = {
         fontSize: '3px',
-        fontFamily: 'sans-serif',
-        color: '#fffff', 
+        fontFamily: 'Righteous',
+        color: 'ffffff', 
     };
 
     const data = [
@@ -74,17 +75,17 @@ function Details(props) {
 
 
     return (
-        <div className="container">
+        <div className="show-card container">
             <div className="row">
                 <div className="col-xs-6 col-md-6">
                     <Card>
-                        <Card.Img variant="top" src={show.image} />
+                        <Card.Img variant="top" src={show.image} alt="movie image for the chosen movie"/>
                         <Card.Body>
-                            <Card.Title> Show Name: {show.name} </Card.Title>
-                            <Card.Text> Description: {show.description}
+                            <Card.Title className="details-headings"> Show Name: {show.name} </Card.Title>
+                            <Card.Text className="details-text"> Description: {show.description}
                             </Card.Text>
                         </Card.Body>
-                        <ListGroup className="list-group-flush">
+                        <ListGroup className="details-text list-group-flush">
                             <ListGroupItem> Genre: {show.genre} </ListGroupItem>
                             <ListGroupItem> Number of Episodes: {show.numOfEpisodes}</ListGroupItem>
                             <ListGroupItem> Rating: {show.rating}</ListGroupItem>
@@ -119,7 +120,7 @@ function Details(props) {
                             </ListGroupItem>
 
                         </ListGroup>
-                        <Card.Body>
+                        <Card.Body className="text-center">
 
                             <Card.Link onClick={handleFormSubmit}>Save Changes</Card.Link>
                             <Card.Link onClick={backToProfile}> Back to Profile </Card.Link>
@@ -127,18 +128,16 @@ function Details(props) {
                     </Card>
                 </div>
 
-                <div className="col-xs-6 col-md-6">
-                    <div className="card">
-                        <div className="card-body">
-                            <h5 className="card-title">Time Breakdown</h5>
+                <div className="pie-chart col-xs-6 col-md-6">
+                        <div>
+                            <h5 className="details-headings text-center">Time Breakdown</h5>
                             {/* React Pie Chart */}
                             <PieChart
                                 data={data}
                                 label={({ dataEntry }) => Math.round(dataEntry.percentage) + '%' + dataEntry.title} 
                                 labelStyle={defaultLabelStyle}
                             />
-                        </div>
-                    </div>
+                        </div> 
                 </div>
             </div >
         </div >
