@@ -5,6 +5,7 @@ import Col from "./Col";
 import Card from "./Card";
 import SearchForm from "./SearchForm";
 import axios from "axios";
+import { withRouter } from "react-router";
 
 var uid = -1;
 
@@ -56,7 +57,7 @@ class Search extends Component {
   };
 
   reDirecttoProfile = ()=>{
-    window.location.href = "/Profile?uid="+uid
+    this.props.history.push( "/Profile?uid="+uid)
   }
 
   async saveToList ({result}) {
@@ -154,4 +155,4 @@ class Search extends Component {
   }
 }
 
-export default Search;
+export default withRouter(Search);

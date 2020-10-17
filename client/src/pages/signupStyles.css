@@ -14,31 +14,29 @@
     /* background-color: burlywood; */
 }
 
-.form{
+/* .form{
     margin-top: 2em;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* background-color: lightcoral; */
-}
+     background-color: lightcoral; 
+} */
 .form-group{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     width: fit-content;
+ 
 }
 
 input{
-    margin-top: 6px;
+    margin-top: 10px;
     min-width: 18em;
     height: 45px;
     padding: 0px 10px;
-    font-size: 40px;
+    font-size: 15px;
     background-color: lightgray;
     border: 0;
-    border-radius: 4px;
-    margin-bottom: 31px;
-    transition: all 250ms ease-in-out;
  }
   :focus{
       outline: none;
@@ -57,8 +55,41 @@ input{
   font-size: 16px;
  }
 
+.app{
+    text-align: center;
+}
 
+.card-title{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: fit-content;
 
+}
 
+.blocktext{
+    margin-left: auto;
+    margin-right: auto;
+    width: 15em;
+    margin-top: 15%;
+}
+/* .signup {
+    margin-top: -120px;
+    background:linear-gradient(
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.85)
+      ), url("https://i.ndtvimg.com/i/2016-07/television-generic_650x400_81469541532.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    width: 100vw;
+} */
+.btn{
+    margin: auto;
+    margin: 40px;
+}
 
 

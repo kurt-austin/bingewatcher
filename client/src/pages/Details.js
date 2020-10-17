@@ -16,21 +16,21 @@ function Details(props) {
     let history = useHistory();
     const location = useLocation()
 
- 
+
     useEffect(() => {
         setUser(location.UserId);
         API.loadShow(location.id, location.UserId)
             .then(res => {
-  
+
                 setShow(res.data[0])
                 setFormObject({ ...formObject, timeBudgeted: res.data[0].timeBudgeted, timeLogged: res.data[0].timeLogged });
-  
-  
+
+
             })
             .catch(err => console.log(err));
     }, [])
 
-  
+
     function handleInputChange(event) {
         const { name, value } = event.target;
         setFormObject({ ...formObject, [name]: value })
@@ -42,13 +42,13 @@ function Details(props) {
 
             API.updateUserSelection(show.id, show.UserId, formObject.timeBudgeted, formObject.timeLogged)
                 .then(results => {
-                     history.push({ pathname: "/Details", id: show.id, UserId: show.UserId })
+                    history.push({ pathname: "/Details", id: show.id, UserId: show.UserId })
                     API.loadShow(show.id, show.UserId)
-                    .then(res => {
-                        setShow(res.data[0])
-                        setFormObject({ ...formObject, timeBudgeted: res.data[0].timeBudgeted, timeLogged: res.data[0].timeLogged });
-                    })
-                    .catch(err => console.log(err));
+                        .then(res => {
+                            setShow(res.data[0])
+                            setFormObject({ ...formObject, timeBudgeted: res.data[0].timeBudgeted, timeLogged: res.data[0].timeLogged });
+                        })
+                        .catch(err => console.log(err));
                 })
 
         };
@@ -58,6 +58,20 @@ function Details(props) {
         history.push({ pathname: "/Profile", userId: user })
 
     }
+
+    // defining constants for the Pie chart's label style and data 
+
+    const defaultLabelStyle = {
+        fontSize: '3px',
+        fontFamily: 'sans-serif',
+        color: '#fffff', 
+    };
+
+    const data = [
+        { title: 'Time Budgeted', value: show.timeLeft, color: '#CA1F7B' },
+        { title: 'Time Logged', value: show.timeLogged, color: '#FF7F00' },
+    ];
+
 
     return (
         <div className="container">
@@ -117,11 +131,11 @@ function Details(props) {
                     <div className="card">
                         <div className="card-body">
                             <h5 className="card-title">Time Breakdown</h5>
+                            {/* React Pie Chart */}
                             <PieChart
-                                data={[
-                                    { title: 'How much time budgeted this show', value: show.timeLeft, color: '#C13C37' },
-                                    { title: 'How much time logged for this show', value: show.timeLogged, color: '#6A2135' },
-                                ]}
+                                data={data}
+                                label={({ dataEntry }) => Math.round(dataEntry.percentage) + '%' + dataEntry.title} 
+                                labelStyle={defaultLabelStyle}
                             />
                         </div>
                     </div>
