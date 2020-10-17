@@ -142,7 +142,7 @@ function Profile() {
     return (
         <div className="yellow-background">
             <div className="container container-fluid">
-                <h1 className="profile-heading text-center"> Welcome {user}! <span className="name"></span>How many hours do you have per week?</h1>
+                <h1 className="profile-heading"> Welcome {user}! <span className="name"></span>How many hours do you have per week?</h1>
                 <InputGroup className="mb-3">
                     <FormControl
                         name="timeAvailable"
@@ -155,7 +155,7 @@ function Profile() {
                         value={formObject.timeAvailable}
                     />
                 </InputGroup>
-                <ListGroup className="list-group-flush"> 
+                <ListGroup className="list-group-flush">
                     <ListGroupItem className="profile-regular-text"> <strong>Total Hours Budgeted </strong>: {totalBudgeted}</ListGroupItem>
                     <ListGroupItem className={budgetStatus + " profile-regular-text"}> <strong>Budget Status</strong>: {budgetStatus}</ListGroupItem>
                 </ListGroup>
@@ -173,15 +173,15 @@ function Profile() {
                                                 shows.filter(show => show.showStatus === "COMPLETED").map(show => (
                                                     <ul key={show.id}>
                                                         <div className="row">
-                                                            <div className="col-xs-6 col-md-6 profile-regular-text">
+                                                            <div className="col-xs-4 col-md-4 profile-regular-text">
                                                                 <a href="#" onClick={() => detailsPage(show.id, show.UserId)}>
                                                                     <strong> Show Name  </strong>: {show.name} <br></br> <strong> Runtime</strong>: {show.runtime}
                                                                 </a>
-                                                                <Button className="button-pink" onClick={() => deleteShow(show.id, show.UserId)}>Delete Show</Button>
                                                             </div>
-                                                            <div className="col-xs-6 col-md-6">
+                                                            <div className="col-xs-4 col-md-4">
                                                                 <Card.Img variant="right" className="thumbnail" src={show.image} alt="movie image for the chosen movie" />
                                                             </div>
+                                                            <div className="col-xs-4 col-md-4"><Button className="button-pink" onClick={() => deleteShow(show.id, show.UserId)}>Delete Show</Button> </div>
                                                         </div>
                                                     </ul>)
                                                 )
@@ -204,14 +204,16 @@ function Profile() {
                                                 shows.filter(show => show.showStatus === "INPROGRESS").map(show => (
                                                     <ul key={show.id}>
                                                         <div className="row">
-                                                            <div className="col-xs-6 col-md-6 profile-regular-text">
+                                                            <div className="col-xs-4 col-md-4 profile-regular-text">
                                                                 <a href="#" onClick={() => detailsPage(show.id, show.UserId)}>
                                                                     <strong> Name</strong>: {show.name} <strong> <br></br> Budgeted</strong>:{show.timeBudgeted}&nbsp;
                                                                     </a>
-                                                                <Button className="button-pink" onClick={() => deleteShow(show.id, show.UserId)}>Delete Show</Button>
                                                             </div>
-                                                            <div className="col-xs-6 col-md-6">
+                                                            <div className="col-xs-4 col-md-4">
                                                                 <Card.Img variant="right" className="thumbnail" src={show.image} alt="movie image for the chosen movie" />
+                                                            </div>
+                                                            <div className="col-xs-4 col-md-4">
+                                                                <Button className="button-pink" onClick={() => deleteShow(show.id, show.UserId)}>Delete Show</Button>
                                                             </div>
                                                         </div>
                                                     </ul>)
@@ -220,50 +222,50 @@ function Profile() {
 
                                         </ListGroupItem>
                                     </ButtonToolbar>
+                                </div>
                             </div>
                         </div>
                     </div>
+                </div >
+                <br>
+                </br>
+                <div className="btn-group d-flex justify-content-center">
+                    <Button
+                        type="submit"
+                        size="md"
+                        className="button-pink"
+                        accessibilityLabel="button for searching shows"
+                        onClick={() => search(userId)}>
+                        Search Shows
+                </Button>
+                &nbsp;
+                <Button type="submit"
+                        size="md"
+                        className="button-pink"
+                        accessibilityLabel="button for saving profile selection"
+                        onClick={handleFormSubmit}
+                        disabled={!(formObject.timeAvailable)}>
+                        Save Profile
+                </Button>
+                &nbsp;
+                <Button type="submit"
+                        size="md"
+                        className="button-pink"
+                        accessibilityLabel="button for logging out the user"
+                        onClick={() => logout(userId)}>
+                        Logout
+                </Button>
+                &nbsp;
+                <Button type="submit"
+                        size="md"
+                        className="button-pink"
+                        accessibilityLabel="button for deleting user profile"
+                        onClick={() => deleteUser(userId)}
+                    > Delete Profile
+                </Button>
                 </div>
             </div >
-            <br>
-            </br>
-            <div className="btn-group d-flex justify-content-center">
-                <Button
-                    type="submit"
-                    size="md"
-                    className="button-pink"
-                    accessibilityLabel="button for searching shows"
-                    onClick={() => search(userId)}>
-                    Search Shows
-                </Button>
-                &nbsp;
-                <Button type="submit"
-                    size="md"
-                    className="button-pink"
-                    accessibilityLabel="button for saving profile selection"
-                    onClick={handleFormSubmit}
-                    disabled={!(formObject.timeAvailable)}>
-                    Save Profile
-                </Button>
-                &nbsp;
-                <Button type="submit"
-                    size="md"
-                    className="button-pink"
-                    accessibilityLabel="button for logging out the user"
-                    onClick={() => logout(userId)}>
-                    Logout
-                </Button>
-                &nbsp;
-                <Button type="submit"
-                    size="md"
-                    className="button-pink"
-                    accessibilityLabel="button for deleting user profile"
-                    onClick={() => deleteUser(userId)}
-                > Delete Profile
-                </Button>
-            </div>
         </div >
-            </div >
     );
 }
 

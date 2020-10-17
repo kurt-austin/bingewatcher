@@ -125,14 +125,34 @@ input{
     color: red;
 }
 .app.container{
-    background-image: url("https://lh3.googleusercontent.com/proxy/SRF-3kmJ1TbKSe3X_GV82x6bj-RPYtkIuKZQige9laeBEYcvZddtaoV9e0-_k3CNio7-obghpwMd48maDQWgHma0VtqnlxYHC4sdfzm3ewwTm8xA7sfYRzB1SzrY7gn8KdRRriPuCh1UumnmzzP5Wj7CKht3lNSNRRXBmcqjJQ1I ");
+    background-image: url("tv-cover.png");
    background-size: 100% 100%;
    background-repeat: no-repeat;
    background-attachment: fixed;
     
 }
 
+.button-pink {
+    background-color: #D0417E !important;
+    color: white;
+    border-color:  #D0417E !important;
+    font-family: 'Righteous', cursive; 
+}
 
+.signup-regular-text {
+    color: white;
+    font-family: 'Righteous', cursive;
+}
+
+.register-login {
+    color: #D0417E;
+    font-family: 'Righteous', cursive;
+}
+
+.username-password {
+    color: black;
+    font-family: 'Righteous', cursive;
+}
 
 
 

@@ -120,7 +120,7 @@ function Details(props) {
                             </ListGroupItem>
 
                         </ListGroup>
-                        <Card.Body className="text-center">
+                        <Card.Body>
 
                             <Button className="button-pink" onClick={handleFormSubmit}>Save Changes</Button>
                             &nbsp;
@@ -131,8 +131,9 @@ function Details(props) {
 
                 <div className="pie-chart col-xs-6 col-md-6">
                         <div>
-                            <h5 className="details-headings text-center">Time Breakdown</h5>
+                            <h5 className="details-headings">Time Breakdown</h5>
                             {/* React Pie Chart */}
+
                             <PieChart
                                 data={data}
                                 label={({ dataEntry }) => Math.round(dataEntry.percentage) + '%' + dataEntry.title} 
