@@ -149,15 +149,15 @@ function Profile() {
                         size="md"
                         onChange={handleInputChange}
                         type="number"
-                        className="form-control"
+                        className="form-control profile-regular-text"
                         placeholder="Enter how much time you have available in a week (hours)"
                         // By entering a value, we are creating a controlled input (whatever value we set in state)
                         value={formObject.timeAvailable}
                     />
                 </InputGroup>
-                <ListGroup className="list-group-flush">
-                    <ListGroupItem> <strong>Total Hours Budgeted </strong>: {totalBudgeted}</ListGroupItem>
-                    <ListGroupItem className={budgetStatus}> <strong>Budget Status</strong>: {budgetStatus}</ListGroupItem>
+                <ListGroup className="list-group-flush"> 
+                    <ListGroupItem className="profile-regular-text"> <strong>Total Hours Budgeted </strong>: {totalBudgeted}</ListGroupItem>
+                    <ListGroupItem className={budgetStatus + " profile-regular-text"}> <strong>Budget Status</strong>: {budgetStatus}</ListGroupItem>
                 </ListGroup>
 
                 {/* Completed Shows */}
@@ -173,7 +173,7 @@ function Profile() {
                                                 shows.filter(show => show.showStatus === "COMPLETED").map(show => (
                                                     <ul key={show.id}>
                                                         <div className="row">
-                                                            <div className="col-xs-6 col-md-6">
+                                                            <div className="col-xs-6 col-md-6 profile-regular-text">
                                                                 <a href="#" onClick={() => detailsPage(show.id, show.UserId)}>
                                                                     <strong> Show Name  </strong>: {show.name} <br></br> <strong> Runtime</strong>: {show.runtime}
                                                                 </a>
@@ -204,7 +204,7 @@ function Profile() {
                                                 shows.filter(show => show.showStatus === "INPROGRESS").map(show => (
                                                     <ul key={show.id}>
                                                         <div className="row">
-                                                            <div className="col-xs-6 col-md-6">
+                                                            <div className="col-xs-6 col-md-6 profile-regular-text">
                                                                 <a href="#" onClick={() => detailsPage(show.id, show.UserId)}>
                                                                     <strong> Name</strong>: {show.name} <strong> <br></br> Budgeted</strong>:{show.timeBudgeted}&nbsp;
                                                                     </a>

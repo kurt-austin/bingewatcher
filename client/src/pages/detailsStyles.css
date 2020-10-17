@@ -22,3 +22,10 @@
     font-family: 'Righteous', cursive; 
     color: #D0417E;
 }
+
+.button-pink {
+    background-color: #D0417E !important;
+    color: white;
+    border-color:  #D0417E !important;
+    font-family: 'Righteous', cursive; 
+}
