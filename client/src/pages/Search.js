@@ -6,6 +6,9 @@ import Card from "./Card";
 import SearchForm from "./SearchForm";
 import axios from "axios";
 import { withRouter } from "react-router";
+import searchStyles from "./searchStyles.css";
+import { Button } from 'react-bootstrap';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 var uid = -1;
 
@@ -106,6 +109,8 @@ class Search extends Component {
 
   render() {
     const result = this.state.result;
+
+    console.log(result);
     
 
     return (
@@ -128,7 +133,7 @@ class Search extends Component {
                           <img src={result.image_thumbnail_path} />
                         <br/>
                         <br/>
-                        <button onClick={() => this.saveToList({result})}>Save</button>
+                        <Button className="button-pink" onClick={() => this.saveToList({result})}>Save</Button>
                       </li>
                       </>))}
                   </ul>
@@ -140,7 +145,7 @@ class Search extends Component {
                 )}
             </Card>
               <br/>
-              <button onClick={this.reDirecttoProfile}>Back to Profile</button>
+              <Button className="button-pink" onClick={this.reDirecttoProfile}>Back to Profile</Button>
           </Col>
           <Col size="md-4">
             <Card heading="Search">
