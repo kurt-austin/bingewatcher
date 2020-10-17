@@ -125,9 +125,9 @@ class Search extends Component {
                   <ul className="list-group search-results">
                     {result.map(result => (
                       <>
-                        <h3 >{result.name}</h3>
+                        <h3 className="search-text">{result.name}</h3>
                         <li key={result.id} className="list-group-item">
-                          <p>{result.description}</p>
+                          <p className="regular-text">{result.description}</p>
                           <img src={result.image_thumbnail_path} />
                           <br />
                           <br />
@@ -137,7 +137,7 @@ class Search extends Component {
                   </ul>
                 </div>
               ) : (
-                  <h3 className="results-text">No Results to Display</h3>
+                  <h3 className="regular-text">No Results to Display</h3>
                 )}
             </Card>
             <br />
