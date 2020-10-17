@@ -122,7 +122,7 @@ class Search extends Component {
             >
 
 
-              {this.state.result ? (
+              {this.state.result.length >1 ? (
                 <div className="text-center">
                   <ul className="list-group search-results">
                     {result.map(result => (
