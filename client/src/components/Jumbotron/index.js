@@ -3,7 +3,7 @@ import "./jumbotron.css";
 
 function Jumbotron() {
     return (
-        <div className="jumbotron"></div>
+        <div className="jumbotron" alt="tv icon with the title bingewatchers"></div>
 
     );
 }
