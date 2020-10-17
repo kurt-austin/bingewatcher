@@ -1,0 +1,18 @@
+.card-header{
+    color: magenta;
+    font-size: x-large;
+}
+.text-center{
+    background-color: whitesmoke;
+   font-size: medium;
+   font-style: italic;
+}
+.list-group-item{
+  transition-duration: 2s;
+  transition-timing-function: linear;
+  transition-delay: 1s;
+}
+.list-group{
+    background-color: whitesmoke;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}

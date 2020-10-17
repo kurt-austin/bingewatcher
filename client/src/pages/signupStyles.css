@@ -1,6 +1,11 @@
+/* :root {
+    --input-padding-x: 1.5rem;
+    --input-padding-y: 0.75rem;
+  } */
+
 .header{
     font-size: x-large;
-    color: magenta s;
+    color: magenta ;
 }
 .base-container{
     text-align: center;
@@ -69,10 +74,22 @@ input{
 }
 
 .blocktext{
-    margin-left: auto;
-    margin-right: auto;
-    width: 15em;
-    margin-top: 15%;
+   position: relative;
+   margin-bottom: 1rem;
+   position: absolute;
+   top: 0;
+   left: 0;
+   /* display: block; */
+   /* width: 100%; */
+   /* margin-bottom: 0; */
+   /* Override default `<label>` margin */
+   /* line-height: 1.5; */
+   /* color: #495057;
+   cursor: text; */
+   /* Match the input under the label */
+   /* border: 1px solid transparent; */
+   /* border-radius: .25rem; */
+   /* transition: all .1s ease-in-out; */
 }
 /* .signup {
     margin-top: -120px;
@@ -90,6 +107,21 @@ input{
 .btn{
     margin: auto;
     margin: 40px;
+    font-family: 'Righteous', cursive; 
+    color: #D0417E;
+  
 }
+
+.bg-image{
+    background-image: url("https://i.ndtvimg.com/i/2016-07/television-generic_650x400_81469541532.jpg");
+   background-size: cover;
+   background-position: center;
+   
+}
+body {
+    background-color: #FFFACD;
+}
+
+   
 
 
