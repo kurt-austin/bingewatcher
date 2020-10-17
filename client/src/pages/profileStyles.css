@@ -42,3 +42,15 @@
     padding: 5px; /* Some padding */
     width: 100px; /* Set a small width */
 }
+
+.OVERBUDGETED {
+    color: red;
+}
+
+.UNDERBUDGETED {
+    color: blue;
+}
+
+.FULLYBUDGETED {
+    color: green;
+}
