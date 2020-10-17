@@ -1,4 +1,7 @@
 import React from "react";
+import searchStyles from "./searchStyles.css";
+import { Button } from 'react-bootstrap';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function SearchForm(props) {
   return (
@@ -16,9 +19,9 @@ function SearchForm(props) {
           id="search"
         />
         <br />
-        <button onClick={props.handleFormSubmit} className="btn btn-primary">
+        <Button className="button-pink" onClick={props.handleFormSubmit}>
           Search
-        </button>
+        </Button>
       </div>
     </form>
   );

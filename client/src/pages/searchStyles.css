@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
+.profile-heading {
+    font-family: 'Righteous', cursive;
+    color: #D0417E;
+}
+
+.yellow-background {
+    background-color: #FFFACD;
+    padding-top: 60px;
+}
+
+.button-pink {
+    background-color: #D0417E !important;
+    color: white;
+    border-color:  #D0417E !important;
+    font-family: 'Righteous', cursive;
+}
+
+
+.profile-text {
+    color: #D0417E;
+    font-family: 'Righteous', cursive;
+}
+
+.no-results-style {
+    color: black;
+    font-family: 'Righteous', cursive;
+}
+
+.btn-group {
+    font-family: 'Righteous', cursive; 
+}
+
+.card-padding {
+    padding-top: 60px;
+}
+
+.button-pink {
+    background-color: #D0417E !important;
+    color: white;
+    border-color:  #D0417E !important;
+    font-family: 'Righteous', cursive; 
+}
+
+.thumbnail {
+    border: 1px solid #ddd; /* Gray border */
+    border-radius: 4px;  /* Rounded border */
+    padding: 5px; /* Some padding */
+    width: 100px; /* Set a small width */
+}
+
+.OVERBUDGETED {
+    color: red;
+}
+
+.UNDERBUDGETED {
+    color: blue;
+}
+
+.FULLYBUDGETED {
+    color: green;
+}
