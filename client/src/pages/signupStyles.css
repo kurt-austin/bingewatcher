@@ -1,9 +1,15 @@
+
+
 .header{
     font-size: x-large;
-    color: magenta s;
+    color: magenta;
+    font-size: xx-large;
 }
 .base-container{
     text-align: center;
+    min-width: 20em;
+    
+    font-size: 15px;
     /* background-color: royalblue; */
 }
 .form{
@@ -13,32 +19,23 @@
     text-align: center;
     /* background-color: burlywood; */
 }
-
-.form{
-    margin-top: 2em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* background-color: lightcoral; */
-}
+  
 .form-group{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     width: fit-content;
+ 
 }
 
 input{
-    margin-top: 6px;
-    min-width: 18em;
-    height: 45px;
-    padding: 0px 10px;
-    font-size: 40px;
+    margin-top: 10px;
+    min-width: 20em;
+    height: 30px;
+    padding: 0px 5px;
+    font-size: 15px;
     background-color: lightgray;
     border: 0;
-    border-radius: 4px;
-    margin-bottom: 31px;
-    transition: all 250ms ease-in-out;
  }
   :focus{
       outline: none;
@@ -56,6 +53,84 @@ input{
   display: inline-block;
   font-size: 16px;
  }
+
+.app{
+    text-align: center;
+}
+
+.card.body{
+    position: relative;
+   margin-bottom: 1rem;
+   position: absolute;
+   color: black;
+   font-size: 20px;
+   
+}
+
+.card-title{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: fit-content;
+
+}
+.text-center{
+    text-align: center;
+    color: whitesmoke;
+    font-size: xx-large;
+ padding-bottom: 500px;
+}
+.blocktext{
+   position: relative;
+   margin-bottom: 1rem;
+   position: absolute;
+   top: 0;
+   left: 0;
+   /* display: block; */
+   /* width: 100%; */
+   /* margin-bottom: 0; */
+   /* Override default `<label>` margin */
+   /* line-height: 1.5; */
+   /* color: #495057;
+   cursor: text; */
+   /* Match the input under the label */
+   /* border: 1px solid transparent; */
+   /* border-radius: .25rem; */
+   /* transition: all .1s ease-in-out; */
+}
+/* .signup {
+    margin-top: -120px;
+    background:linear-gradient(
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.85)
+      ), url("https://i.ndtvimg.com/i/2016-07/television-generic_650x400_81469541532.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    width: 100vw;
+} */
+.btn{
+    margin: auto;
+    margin: 40px;
+    font-family: 'Righteous', cursive; 
+    color: #D0417E;
+    background-color: bisque;
+  
+}
+.message{
+    font-size: xx-large;
+    color: red;
+}
+.app.container{
+    background-image: url("https://lh3.googleusercontent.com/proxy/SRF-3kmJ1TbKSe3X_GV82x6bj-RPYtkIuKZQige9laeBEYcvZddtaoV9e0-_k3CNio7-obghpwMd48maDQWgHma0VtqnlxYHC4sdfzm3ewwTm8xA7sfYRzB1SzrY7gn8KdRRriPuCh1UumnmzzP5Wj7CKht3lNSNRRXBmcqjJQ1I ");
+   background-size: 100% 100%;
+   background-repeat: no-repeat;
+   background-attachment: fixed;
+    
+}
 
 
 
