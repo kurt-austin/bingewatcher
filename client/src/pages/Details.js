@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import API from "../components/utils/API.js";
 import { PieChart } from 'react-minimal-pie-chart';
-import { Card, ListGroup, ListGroupItem, InputGroup, FormControl } from 'react-bootstrap';
+import { Card, ListGroup, ListGroupItem, InputGroup, FormControl, Button } from 'react-bootstrap';
 import detailsStyles from "./detailsStyles.css";
 
 function Details(props) {
@@ -122,8 +122,9 @@ function Details(props) {
                         </ListGroup>
                         <Card.Body className="text-center">
 
-                            <Card.Link onClick={handleFormSubmit}>Save Changes</Card.Link>
-                            <Card.Link onClick={backToProfile}> Back to Profile </Card.Link>
+                            <Button className="button-pink" onClick={handleFormSubmit}>Save Changes</Button>
+                            &nbsp;
+                            <Button className="button-pink" onClick={backToProfile}> Back to Profile </Button>
                         </Card.Body>
                     </Card>
                 </div>

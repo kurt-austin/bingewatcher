@@ -61,3 +61,17 @@
 .FULLYBUDGETED {
     color: green;
 }
+
+.search-text {
+    color:#D0417E;
+    font-family: 'Righteous', cursive !important;
+}
+
+.results-text {
+    color: black;
+    font-family: 'Righteous', cursive !important;
+}
+
+.card-padding{
+margin-top: 100px !important;
+}
